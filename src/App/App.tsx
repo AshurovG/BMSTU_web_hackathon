@@ -1,23 +1,23 @@
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
-import styles from './App.module.scss'
-// import MainPage from 'pages/MainPage';
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
+import styles from "./App.module.scss";
+import MainPage from "pages/MainPage";
 // import DetaliedPage from 'pages/DetaliedPage';
 
 function App() {
-    return (
-      <div className='app'>
-        <HashRouter>
-            <Routes>
-                {/* <Route path="/" element={<MainPage />} /> */}
+  return (
+    <div className="app">
+      <HashRouter>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
 
-                {/* <Route path="/subscription">
+          {/* <Route path="/subscription">
                   <Route path=":id" element={<DetaliedPage />} />
                 </Route> */}
-            </Routes>
-            <h1 className={styles.title}>title</h1>
-        </HashRouter>
-      </div>
-    );
-  }
-  
+        </Routes>
+        <h1 className={styles.title}>title</h1>
+      </HashRouter>
+    </div>
+  );
+}
+
 export default App;
