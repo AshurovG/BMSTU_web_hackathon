@@ -9,12 +9,7 @@ function App() {
       <HashRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
-
-          {/* <Route path="/subscription">
-                  <Route path=":id" element={<DetaliedPage />} />
-                </Route> */}
         </Routes>
-        <h1 className={styles.title}>title</h1>
       </HashRouter>
     </div>
   );
