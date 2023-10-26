@@ -34,8 +34,8 @@
       "styles": [
         "styles/*"
       ],
-      "Store": [
-        "Store/*"
+      "store": [
+        "store/*"
       ],
       "utils": [
         "utils/*"
