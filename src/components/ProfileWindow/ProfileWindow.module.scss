@@ -6,7 +6,9 @@
     width: 300px;
     height: auto;
     padding: 15px;
-    position: fixed;
+    // position: fixed;
+    top: 100px;
+    // right: 200;
     z-index: 10000;
     background: $default-color;
     border-radius: $border-radius;
@@ -19,12 +21,6 @@
 
     &__btn {
         padding: 0 auto;
-
-        &-container {
-            width: 100%;
-            display: flex;
-            justify-content: flex-end;
-        }
     }
 }
 

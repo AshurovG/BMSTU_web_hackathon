@@ -2,7 +2,7 @@
 import { action, computed, makeObservable, observable } from 'mobx';
 import { ILocalStore } from 'utils/useLocalStore';
 // import {UserInfo} from './types'
-// import rootStore from 'Store/RootStore/instance';
+import rootStore from 'store/RootStore/instance';
 
 export interface IAuthFormStore {
     postUserData(): Promise<void>;
@@ -62,6 +62,7 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
 
     public handleRegisterButtonClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
         event.preventDefault();
+        rootStore.userAuth.setIsLogin(true)
         // localStorage.removeItem('savedRecipes');
       
         // this.validation();

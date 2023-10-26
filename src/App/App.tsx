@@ -2,6 +2,7 @@ import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import styles from "./App.module.scss";
 import MainPage from "pages/MainPage";
 import AuthForm from "pages/AuthForm";
+// import rootStore from 'store/RootStore/instance';
 // import DetaliedPage from 'pages/DetaliedPage';
 
 function App() {

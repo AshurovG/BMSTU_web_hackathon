@@ -45,6 +45,7 @@ const MainPage = () => {
         </motion.div>)}
       </AnimatePresence>
       </div>
+      
     </div>
   );
 };

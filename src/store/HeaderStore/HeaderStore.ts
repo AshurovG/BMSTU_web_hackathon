@@ -1,29 +1,39 @@
 import { action, computed, makeObservable, observable } from 'mobx';
 import { ILocalStore } from 'utils/useLocalStore';
 
-export type PrivateFields = '_isBurgerMenuOpen' | '_isAuthFormOpen';
+export type PrivateFields = '_isBurgerMenuOpen' | '_isAuthFormOpen' | '_isProfileButtonClicked';
 
 export default class HeaderStore implements ILocalStore {
     private _isBurgerMenuOpen = false;
     private _isAuthFormOpen = false;
+    private _isProfileButtonClicked = false;
 
     public setIsBurgerMenuOpen = () => {
         this._isBurgerMenuOpen = !this._isBurgerMenuOpen;
     }
 
     public setIsAuthFormOpen = () => {
-        console.log('ФОРМА РЕГИСТРАЦИИ')
         this._isAuthFormOpen = true
+        
     }
+
+    public setIsProfileButtonClicked = () => {
+        this._isProfileButtonClicked = !this._isProfileButtonClicked
+        console.log('set')
+    }
+
 
     constructor() {
         makeObservable<HeaderStore, PrivateFields>(this, {
             _isBurgerMenuOpen: observable,
             _isAuthFormOpen: observable,
+            _isProfileButtonClicked: observable,
             isBurgerMenuOpen: computed,
             isAuthFormOpen: computed,
+            isProfileButtonClicked: computed,
             setIsBurgerMenuOpen: action,
-            setIsAuthFormOpen: action
+            setIsAuthFormOpen: action,
+            setIsProfileButtonClicked: action
         })
     };
 
@@ -34,6 +44,10 @@ export default class HeaderStore implements ILocalStore {
     get isAuthFormOpen(): boolean {
         return this._isAuthFormOpen;
     };
+
+    get isProfileButtonClicked(): boolean {
+        return this._isProfileButtonClicked
+    }
 
     reset(): void {}
 
