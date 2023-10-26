@@ -86,17 +86,19 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
 
     public usernameValidation = (): void => {
         if ((this._usernameValue.length < 6 || this._usernameValue.length > 15) && this._usernameValue.length !== 0) {
-            this._usernameValid = 'User name must be between 6 and 15 characters';
+          this._usernameValid = 'Имя пользователя должно быть от 6 до 15 символов';
         } else if (this._usernameValue.length === 0) {
-            this._usernameValid = 'This is a required field';
+          this._usernameValid = 'Это обязательное поле';
+        } else if (!/^[a-zA-Z0-9]+$/.test(this._usernameValue)) {
+          this._usernameValid = 'Имя пользователя должно состоять только из латинских символов и цифр';
         } else {
-            this._usernameValid = 'not error'
+          this._usernameValid = 'not error';
         }
-
+      
         if (this._usernameValid === 'not error' && this._fullnameValid === 'not error' && this._passwordValid === 'not error') {
-            this._isValid = true;
+          this._isValid = true;
         } else {
-            this._isValid = false;
+          this._isValid = false;
         }
     }
     
@@ -106,9 +108,9 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
             console.log(words.length)
             console.log(`words ${words}`)
             if ((words.length < 2 || words.length > 5) && this._fullnameValue.length !== 0) {
-                this._fullnameValid = 'The name should be from 2 to 5 words'
+                this._fullnameValid = 'ФИО должно быть от 2 до 5 слов'
             } else if (this._fullnameValue.length === 0) {
-                this._fullnameValid = 'This is a required field'
+                this._fullnameValid = 'Это обязательное поле'
             } else {
                 this._fullnameValid = 'not error'
             }
@@ -124,17 +126,19 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
 
     public passwordValidation = (): void => {
         if ((this._passwordValue.length < 8 || this._passwordValue.length > 20) && this._passwordValue.length !== 0) {
-            this._passwordValid = 'Password must be between 8 and 20 characters';
+          this._passwordValid = 'Пароль должен быть от 8 до 20 символов';
         } else if (this._passwordValue.length === 0) {
-            this._passwordValid = 'This is a required field';
+          this._passwordValid = 'Это обязательное поле';
+        } else if (!/\d/.test(this._passwordValue) || !/[a-zA-Z]/.test(this._passwordValue)) {
+          this._passwordValid = 'Пароль должен содержать латинские символы и цифры';
         } else {
-            this._passwordValid = 'not error';
+          this._passwordValid = 'not error';
         }
-
+      
         if (this._usernameValid === 'not error' && this._fullnameValid === 'not error' && this._passwordValid === 'not error') {
-            this._isValid = true;
+          this._isValid = true;
         } else {
-            this._isValid = false;
+          this._isValid = false;
         }
     }
 
