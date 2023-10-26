@@ -1,55 +1,57 @@
 import * as React from 'react';
 // import cn from 'classnames';
-import Text from 'components/Text/Text';
+// import Text from 'components/Text/Text';
 // import Header from 'components/Header';
+import Button from 'components/Button';
 import styles from './AuthForm.module.scss';
 import Input from 'components/Input';
+import Text from 'components/Text';
+import Header from 'components/Header';
+import ModalWindow from 'components/ModalWindow';
+import SuccessIcon from 'components/icons/SuccessIcon';
+import LockingScreen from 'components/LockingScreen';
 import { useLocalStore } from 'utils/useLocalStore';
 import AuthFormStore from 'store/AuthFormStore';
 import { observer } from 'mobx-react-lite';
-import ModalWindow from 'components/ModalWindow';
-import LockingScreen from 'components/LockingScreen';
-import SuccessIcon from 'components/icons/SuccessIcon';
-import Button from 'components/Button';
 
 const AuthForm: React.FC = () => {
     const authFormStore = useLocalStore(() => new AuthFormStore());
 
     return (
         <div className={styles.form__wrapper}>
-            <form className={styles.login__form} method='post'>
+            <Header />
+            <form className={styles.login__form} action="">
                 {!authFormStore.isLoginForm 
-                ? <h2 className={styles.form__title}>Registration</h2>
-                : <h2 className={styles.form__title}>Login</h2>
+                ? <h2 className={styles.form__title}>Регистрация</h2>
+                : <h2 className={styles.form__title}>Авторизация</h2>
                 }
                 <div className={styles['login__form-wrapper']}>
                     <div className={styles.input__block}>
-                        <Input type='text' value={authFormStore.usernameValue} onChange={authFormStore.setUsernameValue} placeholder='Enter username*'/>
+                        <Input type='text' value={authFormStore.usernameValue} onChange={authFormStore.setUsernameValue} placeholder='Введите имя пользователя*'/>
                         {authFormStore.usernameValid !== '' && <Text tag='p' view='p-16' color='error'>{authFormStore.usernameValid}</Text>}
                     </div>
                     {!authFormStore.isLoginForm &&
                     <div className={styles.input__block}>
-                        <Input type='text' value={authFormStore.fullnameValue} onChange={authFormStore.setFullnameValue} placeholder='Enter fullname*'/>
+                        <Input type='text' value={authFormStore.fullnameValue} onChange={authFormStore.setFullnameValue} placeholder='Введите ФИО*'/>
                         {authFormStore.fullnameValid !== '' && <Text tag='p' view='p-16' color='error'>{authFormStore.fullnameValid}</Text>}
                     </div>
                     }
                     <div className={styles.input__block}>
-                        <Input type='password' value={authFormStore.passwordValue} onChange={authFormStore.setPasswordValue} placeholder='Enter password*'/>
+                        <Input type='password' value={authFormStore.passwordValue} onChange={authFormStore.setPasswordValue} placeholder='Введите пароль*'/>
                         {authFormStore.passwordValid !== '' && <Text tag='p' view='p-16' color='error'>{authFormStore.passwordValid}</Text>}
                     </div>
                     {!authFormStore.isLoginForm 
-                    ? <Button type="submit" onClick={() => {}} className={styles['login__form-btn']}>Register</Button>
-                    : <Button type="submit" onClick={() => {}} className={styles['login__form-btn']}>Login</Button>
+                    ? <Button onClick={(e) => authFormStore.handleRegisterButtonClick(e)} className={styles['login__form-btn']}>Зарегистрироваться</Button>
+                    : <Button className={styles['login__form-btn']}>Войти</Button>
                     }
                     
                     {!authFormStore.isLoginForm 
-                    ? <div onClick={authFormStore.setIsLoginForm} className={styles['login__form-link']}>Do you already have an account?</div>
-                    : <div onClick={authFormStore.setIsLoginForm} className={styles['login__form-link']}>Don 't you have an account yet?</div>
+                    ? <div onClick={authFormStore.setIsLoginForm} className={styles['login__form-link']}>У вас уже есть аккаунт?</div>
+                    : <div onClick={authFormStore.setIsLoginForm} className={styles['login__form-link']}>У вас еще нет аккаунта?</div>
                     }
                 </div>
-                {authFormStore.isExistError && !authFormStore.isLoginForm && !authFormStore.isModalWindow &&<Text tag='p' view='p-16' color='error'>A user with this username already exists!</Text>}
-                {authFormStore.isIncorrectError && authFormStore.isLoginForm && !authFormStore.isModalWindow &&<Text tag='p' view='p-16' color='error'>Invalid username or password!</Text>}
             </form>
+
             {authFormStore.isModalWindow 
             && !authFormStore.isLoginForm &&<ModalWindow to='/' onClick={authFormStore.handleCloseButtonClick} title='You have successfully registered!' className={styles.form__modal}><div className={styles.slot}><SuccessIcon ></SuccessIcon></div></ModalWindow>}
             {authFormStore.isModalWindow && <LockingScreen onClick={authFormStore.handleCloseButtonClick} to='/'></LockingScreen>}
