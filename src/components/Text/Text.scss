@@ -68,6 +68,9 @@
     &-error {
       color: #ff0000;
     }
+    &-default {
+      color: $dark-default-color;
+    }
   }
 
   &.text_multi-ellipsis {

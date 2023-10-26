@@ -1,6 +1,7 @@
 import * as React from "react";
 // import cn from 'classnames';
 import { observer } from "mobx-react-lite";
+import cn from "classnames";
 import { Link } from "react-router-dom";
 import Text from "../Text/Text";
 import LogoIcon from "components/icons/LogoIcon";
@@ -17,29 +18,52 @@ const Header: React.FC = () => {
   const headerStore = useLocalStore(() => new HeaderStore());
 
   return (
-    <div className={styles.header}>
+    <div
+      className={cn(styles.header, { [styles.dark]: rootStore.theme.isDark })}
+    >
       <div className={styles.header__wrapper}>
         <LogoIcon />
-        <Text className={styles.header__title} view="p-20">
+        <Text
+          className={cn(styles.header__title, {
+            [styles.dark]: rootStore.theme.isDark,
+          })}
+          view="p-20"
+        >
           Project name
         </Text>
         <Text className={styles.header__blocks} tag="span">
-          <Link className={styles.header__block} to={"/"}>
+          <Link
+            className={cn(styles.header__block, {
+              [styles.dark]: rootStore.theme.isDark,
+            })}
+            to={"/"}
+          >
             page1
           </Link>
-          <Link className={styles.header__block} to={`/`}>
+          <Link
+            className={cn(styles.header__block, {
+              [styles.dark]: rootStore.theme.isDark,
+            })}
+            to={"/"}
+          >
             page2
           </Link>
-          <Link className={styles.header__block} to={`/`}>
+          <Link
+            className={cn(styles.header__block, {
+              [styles.dark]: rootStore.theme.isDark,
+            })}
+            to={"/"}
+          >
             page3
           </Link>
         </Text>
-        {rootStore.theme.isDark && <div>dddddddddddddd</div>}
         <div className={styles.icons}>
           {/* <FavoritesIcon className={cn(styles.favorite__icon, styles.icons__item)} /> */}
           <Link className={styles.profile__link} to={"/auth"}>
             <AccountIcon
-              className={styles.icons__item}
+              className={cn(styles.icons__item, {
+                [styles.dark]: rootStore.theme.isDark,
+              })}
               onClick={headerStore.setIsAuthFormOpen}
             />
           </Link>

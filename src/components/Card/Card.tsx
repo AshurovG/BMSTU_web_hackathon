@@ -10,7 +10,7 @@ import rootStore from "../../store/RootStore";
 
 export type CardProps = {
   className?: string;
-  image: string;
+  image?: string;
   captionSlot?: React.ReactNode;
   title: React.ReactNode;
   subtitle?: React.ReactNode;
@@ -29,42 +29,42 @@ const Card: React.FC<CardProps> = ({
   onClick,
   actionSlot,
 }) => {
-  const [isDark, setIsDark] = useState(false);
-  useEffect(() => {
-    const storedValue = localStorage.getItem("isDark");
-    setIsDark(storedValue === "true");
-    console.log(localStorage.getItem("isDark"));
-  }, []);
-
   return (
     <div
-      className={cn(styles.card, className, { [styles.dark]: isDark })}
+      className={cn(styles.card, className, {
+        [styles.dark]: rootStore.theme.isDark,
+      })}
       onClick={onClick}
     >
       <div className={styles.card__header}>
         <img className={styles["card__header-src"]} src={image} alt="card" />
       </div>
-      <div className={styles.card__body}>
-        {captionSlot && (
-          <Text
-            className={styles.card__caption}
-            view="p-14"
-            weight="medium"
-            color="secondary"
-          >
-            <ClockIcon className={styles.card__icon} />
-            {captionSlot}
-          </Text>
-        )}
+      <div
+        className={cn(styles.card__body, {
+          [styles.dark]: rootStore.theme.isDark,
+        })}
+      >
+        {captionSlot &&
+          (!rootStore.theme.isDark ? (
+            <Text className={styles.card__caption} view="p-14" weight="medium">
+              <ClockIcon className={styles.card__icon} />
+              {captionSlot}
+            </Text>
+          ) : (
+            <Text
+              className={styles.card__caption}
+              color="default"
+              view="p-14"
+              weight="medium"
+            >
+              <ClockIcon className={styles.card__icon} />
+              {captionSlot}
+            </Text>
+          ))}
         <Text maxLines={2} tag="h4" view="p-20" weight="medium" color="primary">
           {title}
         </Text>
-        <Text
-          maxLines={3}
-          className={styles.card__subtitle}
-          view="p-16"
-          color="secondary"
-        >
+        <Text maxLines={3} className={styles.card__subtitle} view="p-16">
           {subtitle}
         </Text>
         <div className={styles.card__footer}>
@@ -73,9 +73,8 @@ const Card: React.FC<CardProps> = ({
               {contentSlot}
             </Text>
           )}
-          {rootStore.theme.isDark && (
-            <div className={styles.card__action}>{actionSlot}</div>
-          )}
+
+          <div className={styles.card__action}>{actionSlot}</div>
         </div>
       </div>
     </div>

@@ -20,7 +20,8 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
   isChecked,
 }) => {
   const handler = (): void => {
-    rootStore.theme.setIsDark(true);
+    onChange(!isChecked);
+    rootStore.theme.setIsDark(!isChecked);
   };
 
   return (

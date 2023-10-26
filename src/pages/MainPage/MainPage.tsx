@@ -13,10 +13,9 @@ import Loader from "components/Loader";
 import ModalWindow from "components/ModalWindow";
 import Slider from "components/Slider";
 
-import svg from "../../assets/react.svg";
-
 import ThemeSwitcher from "components/ThemeSwitcher";
 import useLocalStorage from "use-local-storage";
+import userSvg from "assets/icons/sun.png";
 
 const MainPage = () => {
   const [checked, setChecked] = useState(true);
@@ -29,10 +28,12 @@ const MainPage = () => {
     <>
       <Header></Header>
       <ThemeSwitcher isChecked={isDark} onChange={() => setIsDark(!isDark)} />
-      snhdjksndjshjk
-      {/* <AuthForm/>
-      <LockingScreen onClick={() => {}} to='/'></LockingScreen> */}
-      <Link to="/auth">text</Link>
+      <Card
+        captionSlot="sssss"
+        subtitle="ssesesese"
+        image={userSvg}
+        title="sss"
+      ></Card>
     </>
   );
 };

@@ -19,27 +19,14 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": "src",
     "paths": {
-      "components": [
-        "components/*"
-      ],
-      "pages": [
-        "pages/*"
-      ],
-      "images": [
-        "images/*"
-      ],
-      "config": [
-        "config/*"
-      ],
-      "styles": [
-        "styles/*"
-      ],
-      "store": [
-        "store/*"
-      ],
-      "utils": [
-        "utils/*"
-      ]
+      "components": ["components/*"],
+      "pages": ["pages/*"],
+      "images": ["images/*"],
+      "config": ["config/*"],
+      "styles": ["styles/*"],
+      "store": ["store/*"],
+      "utils": ["utils/*"],
+      "assets": ["assets/*"]
     }
   },
   "include": ["src"],
