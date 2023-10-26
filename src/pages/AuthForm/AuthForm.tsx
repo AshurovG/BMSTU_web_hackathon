@@ -31,7 +31,7 @@ const AuthForm: React.FC = () => {
                     authFormStore.setUsernameValue(value);
                     authFormStore.usernameValidation();
                     }} placeholder='Введите имя пользователя*'/>
-                        {authFormStore.usernameValid !== '' && <Text tag='p' view='p-16' color='error'>{authFormStore.usernameValid}</Text>}
+                        {authFormStore.usernameValid !== 'not error' && <Text tag='p' view='p-16' color='error'>{authFormStore.usernameValid}</Text>}
                     </div>
                     {!authFormStore.isLoginForm &&
                     <div className={styles.input__block}>
@@ -39,7 +39,7 @@ const AuthForm: React.FC = () => {
                     authFormStore.setFullnameValue(value);
                     authFormStore.fullnameValidation();
                     }} placeholder='Введите ФИО*'/>
-                        {authFormStore.fullnameValid !== '' && <Text tag='p' view='p-16' color='error'>{authFormStore.fullnameValid}</Text>}
+                        {authFormStore.fullnameValid !== 'not error' && <Text tag='p' view='p-16' color='error'>{authFormStore.fullnameValid}</Text>}
                     </div>
                     }
                     <div className={styles.input__block}>
@@ -47,12 +47,19 @@ const AuthForm: React.FC = () => {
                     authFormStore.setPasswordValue(value);
                     authFormStore.passwordValidation();
                     }} placeholder='Введите пароль*'/>
-                        {authFormStore.passwordValid !== '' && <Text tag='p' view='p-16' color='error'>{authFormStore.passwordValid}</Text>}
+                        {authFormStore.passwordValid !== 'not error' && <Text tag='p' view='p-16' color='error'>{authFormStore.passwordValid}</Text>}
                     </div>
-                    {!authFormStore.isLoginForm 
-                    ? <Button onClick={(e) => authFormStore.handleRegisterButtonClick(e)} className={styles['login__form-btn']}>Зарегистрироваться</Button>
-                    : <Button className={styles['login__form-btn']}>Войти</Button>
+                    {authFormStore.isValid
+                    ? !authFormStore.isLoginForm 
+                        ? <Button onClick={(e) => authFormStore.handleRegisterButtonClick(e)} className={styles['login__form-btn']}>Зарегистрироваться</Button>
+                        : <Button className={styles['login__form-btn']}>Войти</Button>
+                    : !authFormStore.isLoginForm 
+                    ? <Button disabled onClick={(e) => authFormStore.handleRegisterButtonClick(e)} className={styles['login__form-btn']}>Зарегистрироваться</Button>
+                    : <Button disabled className={styles['login__form-btn']}>Войти</Button>
+                
                     }
+                    
+                    
                     
                     {!authFormStore.isLoginForm 
                     ? <div onClick={authFormStore.setIsLoginForm} className={styles['login__form-link']}>У вас уже есть аккаунт?</div>

@@ -8,7 +8,7 @@ export interface IAuthFormStore {
     postUserData(): Promise<void>;
 }
 
-export type PrivateFields = '_usernameValue' | '_fullnameValue' | '_passwordValue' | '_isLoginForm' | '_isModalWindow' | '_isExistError' | '_isIncorrectError' | '_usernameValid' | '_fullnameValid' | '_passwordValid';
+export type PrivateFields = '_usernameValue' | '_fullnameValue' | '_passwordValue' | '_isLoginForm' | '_isModalWindow' | '_isExistError' | '_isIncorrectError' | '_usernameValid' | '_fullnameValid' | '_passwordValid' | '_isValid';
 
 export default class AuthFormStore implements IAuthFormStore, ILocalStore {
     private _usernameValue = '';
@@ -21,6 +21,7 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
     private _usernameValid = '';
     private _fullnameValid = '';
     private _passwordValid = '';
+    private _isValid = false;
 
     // private _userInfo: UserInfo  = null;
 
@@ -89,7 +90,13 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
         } else if (this._usernameValue.length === 0) {
             this._usernameValid = 'This is a required field';
         } else {
-            this._usernameValid = ''
+            this._usernameValid = 'not error'
+        }
+
+        if (this._usernameValid === 'not error' && this._fullnameValid === 'not error' && this._passwordValid === 'not error') {
+            this._isValid = true;
+        } else {
+            this._isValid = false;
         }
     }
     
@@ -103,9 +110,16 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
             } else if (this._fullnameValue.length === 0) {
                 this._fullnameValid = 'This is a required field'
             } else {
-                this._fullnameValid = ''
+                this._fullnameValid = 'not error'
+            }
+
+            if (this._usernameValid === 'not error' && this._fullnameValid === 'not error' && this._passwordValid === 'not error') {
+                this._isValid = true;
+            } else {
+                this._isValid = false;
             }
         }
+        
     }
 
     public passwordValidation = (): void => {
@@ -114,7 +128,13 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
         } else if (this._passwordValue.length === 0) {
             this._passwordValid = 'This is a required field';
         } else {
-            this._passwordValid = '';
+            this._passwordValid = 'not error';
+        }
+
+        if (this._usernameValid === 'not error' && this._fullnameValid === 'not error' && this._passwordValid === 'not error') {
+            this._isValid = true;
+        } else {
+            this._isValid = false;
         }
     }
 
@@ -161,6 +181,7 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
             _usernameValid: observable,
             _fullnameValid: observable,
             _passwordValid: observable,
+            _isValid: observable,
             usernameValue: computed,
             fullnameValue: computed,
             passwordValue: computed,
@@ -171,10 +192,11 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
             usernameValid: computed,
             fullnameValid: computed,
             passwordValid: computed,
+            isValid: computed,
             setUsernameValue: action,
             setFullnameValue: action,
             setPasswordValue: action,
-            setIsLoginForm: action
+            setIsLoginForm: action,
         })
     };
 
@@ -215,6 +237,10 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
 
     get passwordValid(): string {
         return this._passwordValid;
+    }
+
+    get isValid(): boolean {
+        return this._isValid;
     }
 
     async postUserData(): Promise<void> {
