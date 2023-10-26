@@ -19,12 +19,6 @@ import ThemeSwitcher from "components/ThemeSwitcher";
 import useLocalStorage from "use-local-storage";
 
 const MainPage = () => {
-  const [checked, setChecked] = useState(true);
-  const [text, setText] = useState("");
-
-  const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const [isDark, setIsDark] = useLocalStorage("isDark", preference);
-
   return (
     <>
       <Header></Header>

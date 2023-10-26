@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { ChangeEvent } from 'react';
 // import cn from 'classnames';
 // import Text from 'components/Text/Text';
 // import Header from 'components/Header';
@@ -27,17 +27,26 @@ const AuthForm: React.FC = () => {
                 }
                 <div className={styles['login__form-wrapper']}>
                     <div className={styles.input__block}>
-                        <Input type='text' value={authFormStore.usernameValue} onChange={authFormStore.setUsernameValue} placeholder='Введите имя пользователя*'/>
+                        <Input type='text' value={authFormStore.usernameValue} onChange={(value: string) => {
+                    authFormStore.setUsernameValue(value);
+                    authFormStore.usernameValidation();
+                    }} placeholder='Введите имя пользователя*'/>
                         {authFormStore.usernameValid !== '' && <Text tag='p' view='p-16' color='error'>{authFormStore.usernameValid}</Text>}
                     </div>
                     {!authFormStore.isLoginForm &&
                     <div className={styles.input__block}>
-                        <Input type='text' value={authFormStore.fullnameValue} onChange={authFormStore.setFullnameValue} placeholder='Введите ФИО*'/>
+                        <Input type='text' value={authFormStore.fullnameValue} onChange={(value: string) => {
+                    authFormStore.setFullnameValue(value);
+                    authFormStore.fullnameValidation();
+                    }} placeholder='Введите ФИО*'/>
                         {authFormStore.fullnameValid !== '' && <Text tag='p' view='p-16' color='error'>{authFormStore.fullnameValid}</Text>}
                     </div>
                     }
                     <div className={styles.input__block}>
-                        <Input type='password' value={authFormStore.passwordValue} onChange={authFormStore.setPasswordValue} placeholder='Введите пароль*'/>
+                        <Input type='password' value={authFormStore.passwordValue} onChange={(value: string) => {
+                    authFormStore.setPasswordValue(value);
+                    authFormStore.passwordValidation();
+                    }} placeholder='Введите пароль*'/>
                         {authFormStore.passwordValid !== '' && <Text tag='p' view='p-16' color='error'>{authFormStore.passwordValid}</Text>}
                     </div>
                     {!authFormStore.isLoginForm 
