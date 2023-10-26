@@ -1,13 +1,22 @@
-$brand: #B5460F;
-$brand-hover: rgba(181, 70, 15, 0.70);
-$brand-disabled: #D9D9D9;
-$brand-active: #872D01;
+$brand: #518581;
+$brand-hover: #86aaa7;
+$brand-disabled: #d9d9d9;
+$brand-active: #487773;
 $default-color: #fff;
 $text-primary: #000;
-$text-secondary: #AFADB5;
-$checkbox-disabled: rgba(255, 255, 255, 0.50);
+$text-secondary: #afadb5;
+$checkbox-disabled: rgba(255, 255, 255, 0.5);
 $description-background: rgba(181, 70, 15, 0.33);
 $box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+
+[data-theme="dark"] {
+  $background-color: #0a0a0a;
+  $foreground-color: #567aff;
+  $primary-text-color: #f6f6f6;
+  $secondary-text-color: #0a0a0a;
+  $toggle-bg: #283452;
+  $toggle-fg: #00a6ff;
+}
 
 $space-xl: 24px;
 $space-l: 20px;
