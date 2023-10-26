@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import Header from "components/Header";
+// import Button from "components/Button";
+// import AuthForm from "components/AuthForm";
+// import LockingScreen from "components/LockingScreen";
 
 import Button from "components/Button";
 import Card from "components/Card";
@@ -21,20 +26,13 @@ const MainPage = () => {
   const [isDark, setIsDark] = useLocalStorage("isDark", preference);
 
   return (
-    <div data-theme={isDark ? "dark" : "light"}>
-      <div>Кнопка</div>
-      <Button>Привет</Button>
-      <div>Карточка</div>
-      <Card title={"ssss"} image={svg} actionSlot={<Button>Save</Button>} />
-      <div>Чекбокс</div>
-      <CheckBox checked={checked} onChange={() => setChecked(!checked)} />
-      <div>Инпут</div>
-      <Input value={text} onChange={setText} />
-      <div>Loader</div>
-      <Loader />
-      <div>Switch</div>
-      <ThemeSwitcher isChecked={isDark} onChange={() => setIsDark(!isDark)} />
-    </div>
+    <>
+      <Header></Header>
+      snhdjksndjshjk
+      {/* <AuthForm/>
+      <LockingScreen onClick={() => {}} to='/'></LockingScreen> */}
+      <Link to="/auth">text</Link>
+    </>
   );
 };
 
