@@ -10,12 +10,18 @@ import Slider from "components/Slider";
 
 import svg from "../../assets/react.svg";
 
+import ThemeSwitcher from "components/ThemeSwitcher";
+import useLocalStorage from "use-local-storage";
+
 const MainPage = () => {
   const [checked, setChecked] = useState(true);
   const [text, setText] = useState("");
 
+  const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [isDark, setIsDark] = useLocalStorage("isDark", preference);
+
   return (
-    <>
+    <div data-theme={isDark ? "dark" : "light"}>
       <div>Кнопка</div>
       <Button>Привет</Button>
       <div>Карточка</div>
@@ -26,7 +32,9 @@ const MainPage = () => {
       <Input value={text} onChange={setText} />
       <div>Loader</div>
       <Loader />
-    </>
+      <div>Switch</div>
+      <ThemeSwitcher isChecked={isDark} onChange={() => setIsDark(!isDark)} />
+    </div>
   );
 };
 
