@@ -28,6 +28,7 @@ const MainPage = () => {
   return (
     <>
       <Header></Header>
+      <ThemeSwitcher isChecked={isDark} onChange={() => setIsDark(!isDark)} />
       snhdjksndjshjk
       {/* <AuthForm/>
       <LockingScreen onClick={() => {}} to='/'></LockingScreen> */}

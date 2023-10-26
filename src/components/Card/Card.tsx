@@ -5,6 +5,9 @@ import styles from "./Card.module.scss";
 import ClockIcon from "components/icons/ClockIcon";
 import { useEffect, useState } from "react";
 
+// import RootStore from "../../store/RootStore";
+import rootStore from "../../store/RootStore";
+
 export type CardProps = {
   className?: string;
   image: string;
@@ -70,7 +73,7 @@ const Card: React.FC<CardProps> = ({
               {contentSlot}
             </Text>
           )}
-          {localStorage.getItem("isDark") && (
+          {rootStore.theme.isDark && (
             <div className={styles.card__action}>{actionSlot}</div>
           )}
         </div>

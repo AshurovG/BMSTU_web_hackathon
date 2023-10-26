@@ -2,23 +2,28 @@ import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import styles from "./App.module.scss";
 import MainPage from "pages/MainPage";
 import AuthForm from "pages/AuthForm";
+
+import rootStore from "../store/RootStore/instance";
 // import DetaliedPage from 'pages/DetaliedPage';
+
+if (!localStorage.getItem("isDark")) {
+  rootStore.theme.setIsDark(false);
+  localStorage.setItem("isDark", "false");
+}
 
 function App() {
   return (
     <div className="app">
-      
       <HashRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path='/auth' element={<AuthForm />}></Route>
-          <Route path='*' element={<Navigate to="/" replace />} />
+          <Route path="/auth" element={<AuthForm />}></Route>
+          <Route path="*" element={<Navigate to="/" replace />} />
 
           {/* <Route path="/subscription">
                   <Route path=":id" element={<DetaliedPage />} />
                 </Route> */}
         </Routes>
-
 
         {/* <Routes>
                     <Route path='/' element={<RecipesPage />} />

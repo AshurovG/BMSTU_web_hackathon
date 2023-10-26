@@ -3,6 +3,7 @@ import Sun from "../../assets/icons/sun.png";
 import Moon from "../../assets/icons/moon.png";
 
 import styles from "./ThemeSwitcher.module.scss";
+import rootStore from "../../store/RootStore";
 
 export type ThemeSwitcherProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -19,7 +20,7 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
   isChecked,
 }) => {
   const handler = (): void => {
-    onChange(!isChecked);
+    rootStore.theme.setIsDark(true);
   };
 
   return (
