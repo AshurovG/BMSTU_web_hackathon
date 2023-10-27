@@ -33,30 +33,7 @@ const MainPage = () => {
       })}
     >
       <Header></Header>
-
-      <div className={styles["main__page-wrapper"]}>
-        <Card
-          captionSlot="sssss"
-          subtitle="ssesesese"
-          image={userSvg}
-          title="sss"
-          actionSlot={<Button>kakaka</Button>}
-        ></Card>
-        <div>--------------------</div>
-        <Input
-          placeholder="aaa"
-          value={input}
-          onChange={(str) => setInput(str)}
-        />
-        <CheckBox checked={checked} onChange={() => setChecked(!checked)} />
-        {/* <MultiDropdown
-          className={styles.selection__block}
-          options={recipesStore.options}
-          value={recipesStore.dropdownValue}
-          onChange={recipesStore.handleDropdownChange}
-          getTitle={recipesStore.getDropdownTitle}
-        /> */}
-      </div>
+      <div className={styles["main__page-wrapper"]}></div>
     </div>
   );
 };
