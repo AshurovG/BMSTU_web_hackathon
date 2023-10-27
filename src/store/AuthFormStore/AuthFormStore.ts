@@ -60,7 +60,6 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
 
     public handleRegisterButtonClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
         event.preventDefault();
-        console.log('handle register')
         this._isModalWindow = true;
         this.postUserData()
       };
@@ -213,10 +212,8 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
         };
 
         const response = await axios.post(url, requestBody);
-        console.log(response.status)
 
         runInAction(() => {
-
             if (response.status === 200 || response.status === 201) {
                 rootStore.userAuth.setUserInfo(requestBody)
                 rootStore.userAuth.setIsLogin(true)
