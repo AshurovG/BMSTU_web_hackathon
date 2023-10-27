@@ -2,6 +2,7 @@ import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import styles from "./App.module.scss";
 import MainPage from "pages/MainPage";
 import AuthForm from "pages/AuthForm";
+import rootStore from "store/RootStore";
 // import rootStore from 'store/RootStore/instance';
 // import DetaliedPage from 'pages/DetaliedPage';
 
@@ -12,7 +13,7 @@ function App() {
       <HashRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path='/auth' element={<AuthForm />}></Route>
+          {!rootStore.userAuth.isLogin && <Route path='/auth' element={<AuthForm />}/>}
           <Route path='*' element={<Navigate to="/" replace />} />
 
           {/* <Route path="/subscription">

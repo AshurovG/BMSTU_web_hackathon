@@ -7,7 +7,7 @@ import Input from 'components/Input';
 import { useLocalStore } from 'utils/useLocalStore';
 import AuthFormStore from 'store/AuthFormStore';
 import { observer } from 'mobx-react-lite';
-import ModalWindow from 'components/ModalWindow';
+// import ModalWindow from 'components/ModalWindow';
 import LockingScreen from 'components/LockingScreen';
 import SuccessIcon from 'components/icons/SuccessIcon';
 import Button from 'components/Button';
@@ -50,13 +50,13 @@ const AuthForm: React.FC = () => {
                 {authFormStore.isExistError && !authFormStore.isLoginForm && !authFormStore.isModalWindow &&<Text tag='p' view='p-16' color='error'>A user with this username already exists!</Text>}
                 {authFormStore.isIncorrectError && authFormStore.isLoginForm && !authFormStore.isModalWindow &&<Text tag='p' view='p-16' color='error'>Invalid username or password!</Text>}
             </form>
-            {authFormStore.isModalWindow 
+            {/* {authFormStore.isModalWindow 
             && !authFormStore.isLoginForm &&<ModalWindow to='/' onClick={authFormStore.handleCloseButtonClick} title='You have successfully registered!' className={styles.form__modal}><div className={styles.slot}><SuccessIcon ></SuccessIcon></div></ModalWindow>}
             {authFormStore.isModalWindow && <LockingScreen onClick={authFormStore.handleCloseButtonClick} to='/'></LockingScreen>}
 
             {authFormStore.isModalWindow 
             && authFormStore.isLoginForm &&<ModalWindow to='/' onClick={authFormStore.handleCloseButtonClick} title='You have successfully logged in!' className={styles.form__modal}><div className={styles.slot}><SuccessIcon></SuccessIcon></div></ModalWindow>}
-            {authFormStore.isModalWindow && authFormStore.isLoginForm && <LockingScreen onClick={authFormStore.handleCloseButtonClick} to='/'></LockingScreen>}
+            {authFormStore.isModalWindow && authFormStore.isLoginForm && <LockingScreen onClick={authFormStore.handleCloseButtonClick} to='/'></LockingScreen>} */}
         </div >
     )
 };

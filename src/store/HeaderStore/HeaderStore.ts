@@ -1,5 +1,6 @@
 import { action, computed, makeObservable, observable } from 'mobx';
 import { ILocalStore } from 'utils/useLocalStore';
+import rootStore from 'store/RootStore';
 
 export type PrivateFields = '_isBurgerMenuOpen' | '_isAuthFormOpen' | '_isProfileButtonClicked';
 

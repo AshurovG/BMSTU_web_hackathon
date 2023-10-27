@@ -7,12 +7,13 @@ import styles from './AuthForm.module.scss';
 import Input from 'components/Input';
 import Text from 'components/Text';
 import Header from 'components/Header';
-import ModalWindow from 'components/ModalWindow';
+// import ModalWindow from 'components/ModalWindow';
 import SuccessIcon from 'components/icons/SuccessIcon';
 import LockingScreen from 'components/LockingScreen';
 import { useLocalStore } from 'utils/useLocalStore';
 import AuthFormStore from 'store/AuthFormStore';
 import { observer } from 'mobx-react-lite';
+import rootStore from 'store/RootStore';
 
 const AuthForm: React.FC = () => {
     const authFormStore = useLocalStore(() => new AuthFormStore());
@@ -21,8 +22,10 @@ const AuthForm: React.FC = () => {
         <div className={styles.form__wrapper}>
             <Header />
             <form className={styles.login__form} action="">
+                {!rootStore.userAuth.isLogin && <h4>DNAHJKFDA</h4>}
                 {!authFormStore.isLoginForm 
                 ? <h2 className={styles.form__title}>Регистрация</h2>
+                
                 : <h2 className={styles.form__title}>Авторизация</h2>
                 }
                 <div className={styles['login__form-wrapper']}>
@@ -56,10 +59,7 @@ const AuthForm: React.FC = () => {
                     : !authFormStore.isLoginForm 
                     ? <Button disabled onClick={(e) => authFormStore.handleRegisterButtonClick(e)} className={styles['login__form-btn']}>Зарегистрироваться</Button>
                     : <Button disabled className={styles['login__form-btn']}>Войти</Button>
-                
                     }
-                    
-                    
                     
                     {!authFormStore.isLoginForm 
                     ? <div onClick={authFormStore.setIsLoginForm} className={styles['login__form-link']}>У вас уже есть аккаунт?</div>
@@ -68,13 +68,13 @@ const AuthForm: React.FC = () => {
                 </div>
             </form>
 
-            {authFormStore.isModalWindow 
+            {/* {authFormStore.isModalWindow 
             && !authFormStore.isLoginForm &&<ModalWindow to='/' onClick={authFormStore.handleCloseButtonClick} title='You have successfully registered!' className={styles.form__modal}><div className={styles.slot}><SuccessIcon ></SuccessIcon></div></ModalWindow>}
             {authFormStore.isModalWindow && <LockingScreen onClick={authFormStore.handleCloseButtonClick} to='/'></LockingScreen>}
 
             {authFormStore.isModalWindow 
             && authFormStore.isLoginForm &&<ModalWindow to='/' onClick={authFormStore.handleCloseButtonClick} title='You have successfully logged in!' className={styles.form__modal}><div className={styles.slot}><SuccessIcon></SuccessIcon></div></ModalWindow>}
-            {authFormStore.isModalWindow && authFormStore.isLoginForm && <LockingScreen onClick={authFormStore.handleCloseButtonClick} to='/'></LockingScreen>}
+            {authFormStore.isModalWindow && authFormStore.isLoginForm && <LockingScreen onClick={authFormStore.handleCloseButtonClick} to='/'></LockingScreen>} */}
         </div >
     )
 };
