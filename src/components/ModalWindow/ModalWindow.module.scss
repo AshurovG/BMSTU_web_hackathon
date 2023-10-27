@@ -22,11 +22,10 @@
     }
 
     &__content {
-        padding: 20px;
+        padding: 40px 20px;
         border-radius: $border-radius;
         background-color: #fff;
-        height: 400px;
-        width: 400px;
+        width: 30vw;
         transform: scale(0.5);
         transition: 0.4s all;
 

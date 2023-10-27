@@ -30,10 +30,7 @@ const MainPage = () => {
     <div className={styles.main__page}>
       <Header></Header>
       <div className={styles['main__page-wrapper']}>
-        <Button onClick={() => setValue(true)}>show</Button>
-        <ModalWindow className={styles.test} active={value} setActive={setValue}>
-          fjdklsjfklasjfkljasklfjdkl;as
-        </ModalWindow>
+
       </div>
     </div>
   );

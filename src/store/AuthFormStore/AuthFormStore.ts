@@ -39,11 +39,24 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
     };
 
     public setIsLoginForm = (): void => {
+        this._usernameValue = '';
+        this._fullnameValue = '';
+        this._passwordValue = '';
+        this._usernameValid = '';
+        this._fullnameValid = '';
+        this._passwordValid = '';
+        this._isValid = false;
         this._isLoginForm = !this._isLoginForm;
+    };
+
+    public setIsModalWindow = (value: boolean): void => {
+        this._isModalWindow = value;
     };
 
     public handleLoginButtonClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
         event.preventDefault();
+        rootStore.userAuth.setIsLogin(true)
+        this._isModalWindow = true;
 
         // this.validation();
         // if (this._usernameValid === '' && this._passwordValid === '') {
@@ -64,6 +77,7 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
         event.preventDefault();
         console.log('handle register')
         rootStore.userAuth.setIsLogin(true)
+        this._isModalWindow = true;
         // localStorage.removeItem('savedRecipes');
       
         // this.validation();
@@ -97,10 +111,18 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
           this._usernameValid = 'not error';
         }
       
-        if (this._usernameValid === 'not error' && this._fullnameValid === 'not error' && this._passwordValid === 'not error') {
-          this._isValid = true;
+        if (this._isLoginForm) {
+            if (this._usernameValid === 'not error' && this._passwordValid === 'not error') {
+                this._isValid = true;
+            } else {
+                this._isValid = false;
+            }
         } else {
-          this._isValid = false;
+            if (this._usernameValid === 'not error' && this._fullnameValid === 'not error' && this._passwordValid === 'not error') {
+                this._isValid = true;
+            } else {
+                this._isValid = false;
+            }
         }
     }
     
@@ -116,7 +138,7 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
             } else {
                 this._fullnameValid = 'not error'
             }
-
+            if (this._isLoginForm) {}
             if (this._usernameValid === 'not error' && this._fullnameValid === 'not error' && this._passwordValid === 'not error') {
                 this._isValid = true;
             } else {
@@ -136,12 +158,21 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
         } else {
           this._passwordValid = 'not error';
         }
-      
-        if (this._usernameValid === 'not error' && this._fullnameValid === 'not error' && this._passwordValid === 'not error') {
-          this._isValid = true;
+        
+        if (this._isLoginForm) {
+            if (this._usernameValid === 'not error' && this._passwordValid === 'not error') {
+                this._isValid = true;
+            } else {
+                this._isValid = false;
+            }
         } else {
-          this._isValid = false;
+            if (this._usernameValid === 'not error' && this._fullnameValid === 'not error' && this._passwordValid === 'not error') {
+                this._isValid = true;
+            } else {
+                this._isValid = false;
+            }
         }
+        
     }
 
     // public validation = (): void => {
