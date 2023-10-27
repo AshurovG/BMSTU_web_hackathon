@@ -14,7 +14,13 @@ export type TextProps = {
   /** Контент */
   children: React.ReactNode;
   /** Цвет */
-  color?: "primary" | "secondary" | "accent" | "default" | "error";
+  color?:
+    | "primary"
+    | "secondary"
+    | "accent"
+    | "default"
+    | "dark-secondary"
+    | "error";
   /** Максимальное кол-во строк */
   maxLines?: number;
 };

@@ -8,7 +8,7 @@ import ModalWindow from "components/ModalWindow";
 // import AuthForm from "components/AuthForm";
 // import LockingScreen from "components/LockingScreen";
 import styles from "./MainPage.module.scss";
-
+import cn from "classnames";
 import Button from "components/Button";
 import Card from "components/Card";
 import Input from "components/Input";
@@ -20,12 +20,20 @@ import Slider from "components/Slider";
 import ThemeSwitcher from "components/ThemeSwitcher";
 import useLocalStorage from "use-local-storage";
 import userSvg from "assets/icons/sun.png";
+import rootStore from "store/RootStore";
+import MultiDropdown from "components/DropDown";
 
 const MainPage = () => {
+  const [input, setInput] = useState("");
+  const [checked, setChecked] = useState(false);
   return (
-    <div className={styles.main__page}>
+    <div
+      className={cn(styles.main__page, {
+        [styles.dark]: rootStore.theme.isDark,
+      })}
+    >
       <Header></Header>
-      <div className={styles["main__page-wrapper"]}>fdsfs</div>
+      <div className={styles["main__page-wrapper"]}></div>
     </div>
   );
 };
