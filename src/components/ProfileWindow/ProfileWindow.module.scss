@@ -1,46 +1,51 @@
-@import 'styles/variables.scss';
-@import 'styles/mixins.scss';
-@import 'styles/styles.scss';
+@import "styles/variables.scss";
+@import "styles/mixins.scss";
+@import "styles/styles.scss";
 
 .modal {
-    width: 300px;
-    height: auto;
-    padding: 15px;
-    // position: fixed;
-    top: 100px;
-    // right: 200;
-    z-index: 10000;
-    background: $default-color;
-    border-radius: $border-radius;
-    box-shadow: $box-shadow;
+  width: 300px;
+  height: auto;
+  padding: 15px;
+  // position: fixed;
+  top: 100px;
+  // right: 200;
+  z-index: 10000;
+  background: $default-color;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
 
-    &__title {
-        text-align: center;
-        margin-bottom: 20px;
-    }
+  &__title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
 
-    &__btn {
-        padding: 0 auto;
-    }
+  &__btn {
+    padding: 0 auto;
+  }
+
+  &.dark {
+    color: $default-color;
+    background: $dark-secondary-background;
+  }
 }
 
 .title__block {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 .info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .username__info {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
 }
 
 // .image__wrapper {

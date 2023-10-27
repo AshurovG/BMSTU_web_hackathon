@@ -29,6 +29,10 @@
     transform: scale(0.5);
     transition: 0.4s all;
 
+    &.dark {
+      background-color: #cfcbe9;
+    }
+
     &.active {
       transform: scale(1);
     }

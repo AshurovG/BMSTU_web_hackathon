@@ -4,6 +4,7 @@ import styles from "./ProfileWindow.module.scss";
 import Button from "components/Button";
 import ProfileLogoIcon from "components/icons/ProfileLogoIcon";
 import { Link } from "react-router-dom";
+import rootStore from "store/RootStore";
 
 export type ModalProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   onClick?: () => void;
@@ -19,7 +20,13 @@ const ProfileWindow: React.FC<ModalProps> = ({
   onClick,
 }) => {
   return (
-    <div className={cn(styles.modal, className)}>
+    <div
+      className={cn(
+        styles.modal,
+        { [styles.dark]: rootStore.theme.isDark },
+        className
+      )}
+    >
       <div className={styles.title__block}>
         <ProfileLogoIcon></ProfileLogoIcon>
         <h3 className={styles.modal__title}>Ваш профиль</h3>
