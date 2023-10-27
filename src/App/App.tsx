@@ -6,9 +6,12 @@ import AuthForm from "pages/AuthForm";
 
 import rootStore from "../store/RootStore/instance";
 import classNames from "classnames";
+import useLocalStorage from "use-local-storage";
 // import DetaliedPage from 'pages/DetaliedPage';
 
 function App() {
+  const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [isDark, setIsDark] = useLocalStorage("isDark", preference);
   return (
     <div className={cn(styles.app)}>
       <HashRouter>

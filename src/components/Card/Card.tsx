@@ -44,9 +44,8 @@ const Card: React.FC<CardProps> = ({
             className={styles.card__caption}
             view="p-14"
             weight="medium"
-            color={rootStore.theme.isDark ? "default" : "primary"}
+            color={rootStore.theme.isDark ? "dark-secondary" : "primary"}
           >
-            <ClockIcon className={styles.card__icon} />
             {captionSlot}
           </Text>
         )}
@@ -63,7 +62,7 @@ const Card: React.FC<CardProps> = ({
           maxLines={3}
           className={styles.card__subtitle}
           view="p-16"
-          color={rootStore.theme.isDark ? "default" : "primary"}
+          color={rootStore.theme.isDark ? "dark-secondary" : "primary"}
         >
           {subtitle}
         </Text>

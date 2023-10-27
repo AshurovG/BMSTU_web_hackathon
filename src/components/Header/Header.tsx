@@ -32,17 +32,37 @@ const Header: React.FC = () => {
     >
       <div className={styles.header__wrapper}>
         <LogoIcon />
-        <Text className={styles.header__title} view="p-20">
+        <Text
+          className={cn(styles.header__title, {
+            [styles.dark]: rootStore.theme.isDark,
+          })}
+          view="p-20"
+        >
           Project name
         </Text>
         <Text className={styles.header__blocks} tag="span">
-          <Link className={styles.header__block} to={"/"}>
+          <Link
+            className={cn(styles.header__block, {
+              [styles.dark]: rootStore.theme.isDark,
+            })}
+            to={"/"}
+          >
             page1
           </Link>
-          <Link className={styles.header__block} to={`/`}>
+          <Link
+            className={cn(styles.header__block, {
+              [styles.dark]: rootStore.theme.isDark,
+            })}
+            to={"/"}
+          >
             page2
           </Link>
-          <Link className={styles.header__block} to={`/`}>
+          <Link
+            className={cn(styles.header__block, {
+              [styles.dark]: rootStore.theme.isDark,
+            })}
+            to={"/"}
+          >
             page3
           </Link>
         </Text>
@@ -52,7 +72,9 @@ const Header: React.FC = () => {
           {!rootStore.userAuth.isLogin ? (
             <Link className={styles.profile__link} to={"/auth"}>
               <AccountIcon
-                className={styles.icons__item}
+                className={cn(styles.icons__item, {
+                  [styles.dark]: rootStore.theme.isDark,
+                })}
                 onClick={headerStore.setIsAuthFormOpen}
               />
             </Link>
@@ -62,7 +84,9 @@ const Header: React.FC = () => {
               className={styles.profile__link}
             >
               <AccountIcon
-                className={styles.icons__item}
+                className={cn(styles.icons__item, {
+                  [styles.dark]: rootStore.theme.isDark,
+                })}
                 onClick={headerStore.setIsAuthFormOpen}
               />
             </span>
@@ -70,7 +94,7 @@ const Header: React.FC = () => {
           {headerStore.isBurgerMenuOpen === false ? (
             <BurgerIcon
               className={styles.burger__icon}
-              color="accent"
+              color={rootStore.theme.isDark ? "dark" : "accent"}
               onClick={headerStore.setIsBurgerMenuOpen}
             />
           ) : (
