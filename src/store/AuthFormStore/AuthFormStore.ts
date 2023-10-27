@@ -6,7 +6,8 @@ import rootStore from 'store/RootStore/instance';
 import axios from 'axios';
 
 export interface IAuthFormStore {
-    postUserData(): Promise<void>;
+    postUserData(): Promise<void>; // На регистрацию
+    checkUserData(): Promise<void>; // На авторизацию
 }
 
 export type PrivateFields = '_usernameValue' | '_fullnameValue' | '_passwordValue' | '_isLoginForm' | '_isModalWindow' | '_isExistError' | '_isIncorrectError' | '_usernameValid' | '_fullnameValid' | '_passwordValid' | '_isValid';
@@ -56,8 +57,8 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
 
     public handleLoginButtonClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
         event.preventDefault();
-        rootStore.userAuth.setIsLogin(true)
         this._isModalWindow = true;
+        this.checkUserData()
 
         // this.validation();
         // if (this._usernameValid === '' && this._passwordValid === '') {
@@ -77,7 +78,6 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
     public handleRegisterButtonClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
         event.preventDefault();
         console.log('handle register')
-        rootStore.userAuth.setIsLogin(true)
         this._isModalWindow = true;
         this.postUserData()
         // localStorage.removeItem('savedRecipes');
@@ -285,7 +285,6 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
     async postUserData(): Promise<void> {
         const url = `https://653bf551d5d6790f5ec7af38.mockapi.io/hack/user`;
         const requestBody = {
-            // id: 2,
             username: this._usernameValue,
             fullname:  this._fullnameValue,
             password: this.passwordValue,
@@ -298,29 +297,36 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
 
             if (response.status === 200 || response.status === 201) {
                 rootStore.userAuth.setUserInfo(requestBody)
+                rootStore.userAuth.setIsLogin(true)
                 return
             }
-            // if (response.status === 200) {
-            //     this._userInfo = {
-            //         username: this._usernameValue,
-            //         password: this._passwordValue,
-            //         fullname: this._fullnameValue,
-            //         spoonacularUsername: response.data.username,
-            //         spoonacularPassword: response.data.spoonacularPassword,
-            //         hash: response.data.hash
-            //     }
-
-            //     localStorage.setItem('userInfo', JSON.stringify(this._userInfo));
-            //     localStorage.setItem('isLogin', 'true');
-            //     return
-            // }
         })
     }
+
+    async checkUserData(): Promise<void> {
+        console.log('check')
+        const url = `https://653bf551d5d6790f5ec7af38.mockapi.io/hack/check`;
+        const requestBody = {
+            username: this._usernameValue,
+            password: this.passwordValue,
+        };
+
+        const response = await axios.post(url, requestBody);
+
+        runInAction(() => {
+
+            if (response.status === 200 || response.status === 201 || response.status == 204) { // Сделать получение данных пользователя с бэка
+                rootStore.userAuth.setUserInfo(requestBody)
+                rootStore.userAuth.setIsLogin(true)
+                return
+            }
+        })
+    }
+
 
     reset(): void {
         this._isModalWindow = false;
         this._passwordValue = '';
-        // this._userInfo = null;
         this._usernameValue = '';
         this._fullnameValue = '';
         this._passwordValue = '';

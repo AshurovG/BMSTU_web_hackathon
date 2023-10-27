@@ -20,7 +20,6 @@ export default class HeaderStore implements ILocalStore {
 
     public setIsProfileButtonClicked = () => {
         this._isProfileButtonClicked = !this._isProfileButtonClicked
-        console.log('set')
     }
 
 

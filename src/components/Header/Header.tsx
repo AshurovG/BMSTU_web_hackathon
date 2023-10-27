@@ -26,6 +26,15 @@ const Header: React.FC = () => {
   const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [isDark, setIsDark] = useLocalStorage("isDark", preference);
 
+  const profileHandler: () => void = () => {
+    rootStore.userAuth.setIsLogin(false);
+    rootStore.userAuth.setUserInfo({
+      username: '',
+      fullname: '',
+      password: ''
+  })
+  };
+
   return (
     <div
       className={cn(styles.header, { [styles.dark]: rootStore.theme.isDark })}
@@ -96,7 +105,7 @@ const Header: React.FC = () => {
               <ProfileWindow
                 username={rootStore.userAuth.userInfo.username}
                 fullname={rootStore.userAuth.userInfo.fullname}
-                onClick={() => rootStore.userAuth.setIsLogin(false)}
+                onClick={profileHandler}
               />
             </motion.div>
           )}

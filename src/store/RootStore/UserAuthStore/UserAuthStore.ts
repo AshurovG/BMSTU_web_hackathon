@@ -1,5 +1,6 @@
 import { action, computed, makeObservable, observable } from 'mobx';
 import { UserInfo } from './types';
+// import Cookies from 'js-cookie';
 type PrivateFields = '_isLogin' | '_userInfo';
 
 export default class AuthStore {
@@ -20,7 +21,8 @@ export default class AuthStore {
     }
 
     constructor() {
-        // Сдесь проверить был ли пользователь авторизирован
+        // Здесь проверить был ли пользователь авторизирован
+        // через отправку с запросом с куки
         // если был, то записать все его данные в userInfo
         makeObservable<AuthStore, PrivateFields>(this, {
             _isLogin: observable,
