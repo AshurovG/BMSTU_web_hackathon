@@ -7,7 +7,6 @@ export default class AuthStore {
 
     public setIsLogin = (value: boolean) => {
         this._isLogin = value;
-        console.log(value)
     }
 
     constructor() {
@@ -19,7 +18,6 @@ export default class AuthStore {
     }
 
     get isLogin(): boolean {
-        console.log('get islogin')
         return this._isLogin;
     }
 }

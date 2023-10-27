@@ -4,7 +4,6 @@ import styles from './ModalWindow.module.scss';
 
 export type ModalProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     active: boolean;
-    // setActive: (value: boolean) => void;
     handleBackdropClick: () => void;
     children: React.ReactNode;
     className?: string;
@@ -14,7 +13,6 @@ export type ModalProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const ModalWindow: React.FC<ModalProps> = ({
     active,
-    // setActive,
     children,
     className,
     handleBackdropClick

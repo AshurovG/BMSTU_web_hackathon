@@ -27,7 +27,7 @@ const MainPage = () => {
     <div className={styles.main__page}>
       <Header></Header>
       <div className={styles['main__page-wrapper']}>
-
+fdsfs
       </div>
     </div>
   );
