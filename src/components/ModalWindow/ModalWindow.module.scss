@@ -34,3 +34,56 @@
         }
     }
 }
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg) scale(1);
+    }
+
+    to {
+        transform: rotate((360deg)) scale(1.4);
+    }
+}
+
+@include tablet {
+    .modal__content {
+        width: 40vw;
+    }
+}
+
+@include largeTablet {
+    .modal__content {
+        width: 45vw;
+    }
+}
+  
+@include mediumTablet {
+    .modal__content {
+        width: 50vw;
+    }
+}
+  
+@include smallTablet {
+    .modal__content {
+        width: 60vw;
+    }
+}
+  
+@include mobileLandscape {
+    .modal__content {
+        width: 75vw;
+    }
+}
+  
+@include mobile {
+    .modal__content {
+        width: 75vw;
+        padding: 20px 20px;
+    }
+}
+  
+@include smallMobile {
+    .modal__content {
+        width: 85vw;
+    }
+}
