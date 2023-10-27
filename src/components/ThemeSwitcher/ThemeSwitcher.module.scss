@@ -1,7 +1,7 @@
 @import "styles/variables.scss";
 
 .toggle-container {
-  margin-top: 200px;
+  margin-top: 70px;
 }
 
 .toggle {
@@ -24,15 +24,45 @@
     transition: background-color 250ms ease-in-out;
   }
 
+  &.dark {
+    & + label::before {
+      content: "";
+      height: 1em;
+      width: 2em;
+      border-radius: 1em;
+      background-color: #7961f1;
+      margin-right: 0.5em;
+      transition: background-color 250ms ease-in-out;
+    }
+  }
+
   & + label::after {
     content: "";
     height: 0.8em;
     width: 0.8em;
     border-radius: 1em;
-    background-color: $default-color;
+    // background-color: $default-color;
+    background-image: url("../../assets/icons/sun.png");
+    background-size: cover;
     position: absolute;
     left: 0.2em;
     transition: background-color 250ms ease-in-out, transform 250ms ease-in-out;
+  }
+
+  &.dark {
+    & + label::after {
+      content: "";
+      height: 0.8em;
+      width: 0.8em;
+      border-radius: 1em;
+      // background-color: $default-color;
+      background-image: url("../../assets/icons/moon.png");
+      background-size: cover;
+      position: absolute;
+      left: 0.2em;
+      transition: background-color 250ms ease-in-out,
+        transform 250ms ease-in-out;
+    }
   }
 
   &:checked + label::after {

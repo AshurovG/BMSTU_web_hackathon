@@ -18,11 +18,11 @@ import useLocalStorage from "use-local-storage";
 import userSvg from "assets/icons/sun.png";
 
 const MainPage = () => {
-  const [checked, setChecked] = useState(true);
-  const [text, setText] = useState("");
-
   const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [isDark, setIsDark] = useLocalStorage("isDark", preference);
+
+  const [input, setInput] = useState("");
+  const [checked, setChecked] = useState(false);
 
   return (
     <>
@@ -33,6 +33,25 @@ const MainPage = () => {
         subtitle="ssesesese"
         image={userSvg}
         title="sss"
+        actionSlot={<Button>kakaka</Button>}
+      ></Card>
+      <div>a</div>
+      <Input
+        placeholder="aaa"
+        value={input}
+        onChange={(str) => setInput(str)}
+      />
+      <div>a</div>
+      <CheckBox checked={checked} onChange={() => setChecked(!checked)} />
+      <div>a</div>
+      <Loader size="l" />
+      <div> sssssssssss</div>
+      <Card
+        captionSlot="sssss"
+        subtitle="ssesesese"
+        image={userSvg}
+        title="sss"
+        actionSlot={<Button>kakaka</Button>}
       ></Card>
     </>
   );

@@ -30,12 +30,7 @@ const Card: React.FC<CardProps> = ({
   actionSlot,
 }) => {
   return (
-    <div
-      className={cn(styles.card, className, {
-        [styles.dark]: rootStore.theme.isDark,
-      })}
-      onClick={onClick}
-    >
+    <div className={cn(styles.card, className)} onClick={onClick}>
       <div className={styles.card__header}>
         <img className={styles["card__header-src"]} src={image} alt="card" />
       </div>
@@ -44,32 +39,42 @@ const Card: React.FC<CardProps> = ({
           [styles.dark]: rootStore.theme.isDark,
         })}
       >
-        {captionSlot &&
-          (!rootStore.theme.isDark ? (
-            <Text className={styles.card__caption} view="p-14" weight="medium">
-              <ClockIcon className={styles.card__icon} />
-              {captionSlot}
-            </Text>
-          ) : (
-            <Text
-              className={styles.card__caption}
-              color="default"
-              view="p-14"
-              weight="medium"
-            >
-              <ClockIcon className={styles.card__icon} />
-              {captionSlot}
-            </Text>
-          ))}
-        <Text maxLines={2} tag="h4" view="p-20" weight="medium" color="primary">
+        {captionSlot && (
+          <Text
+            className={styles.card__caption}
+            view="p-14"
+            weight="medium"
+            color={rootStore.theme.isDark ? "default" : "primary"}
+          >
+            <ClockIcon className={styles.card__icon} />
+            {captionSlot}
+          </Text>
+        )}
+        <Text
+          maxLines={2}
+          tag="h4"
+          view="p-20"
+          weight="medium"
+          color={rootStore.theme.isDark ? "default" : "primary"}
+        >
           {title}
         </Text>
-        <Text maxLines={3} className={styles.card__subtitle} view="p-16">
+        <Text
+          maxLines={3}
+          className={styles.card__subtitle}
+          view="p-16"
+          color={rootStore.theme.isDark ? "default" : "primary"}
+        >
           {subtitle}
         </Text>
         <div className={styles.card__footer}>
           {contentSlot && (
-            <Text view="p-18" weight="bold" className={styles.card__content}>
+            <Text
+              view="p-18"
+              weight="bold"
+              className={styles.card__content}
+              color={rootStore.theme.isDark ? "default" : "primary"}
+            >
               {contentSlot}
             </Text>
           )}

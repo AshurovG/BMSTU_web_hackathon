@@ -1,6 +1,9 @@
 import * as React from "react";
 import styles from "./CheckBox.module.scss";
 
+import cn from "classnames";
+import rootStore from "../../store/RootStore";
+
 export type CheckBoxProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
   "onChange"
@@ -25,8 +28,14 @@ const CheckBox: React.FC<CheckBoxProps> = ({
     <label
       className={
         disabled === false || disabled === undefined
-          ? className + ` ${styles["custom-checkbox_enable"]}`
-          : className + ` ${styles["custom-checkbox_disable"]}`
+          ? className +
+            ` ${cn(styles["custom-checkbox_enable"], {
+              [styles.dark]: rootStore.theme.isDark,
+            })}`
+          : className +
+            ` ${cn(styles["custom-checkbox_disable"], {
+              [styles.dark]: rootStore.theme.isDark,
+            })}`
       }
     >
       <input
@@ -50,7 +59,7 @@ const CheckBox: React.FC<CheckBoxProps> = ({
           <path
             id="vector"
             d="M6.66663 19.3548L16.4625 30L33.3333 11.6667"
-            stroke={disabled ? "#00000033" : "#518581"}
+            stroke={rootStore.theme.isDark ? "#7961f1" : "#518581"}
             stroke-width="3.33333"
           />
         </svg>

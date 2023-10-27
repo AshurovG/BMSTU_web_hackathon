@@ -3,6 +3,7 @@ import cn from "classnames";
 import Loader from "../Loader/Loader";
 import Text from "../Text/Text";
 import styles from "./Button.module.scss";
+import rootStore from "../../store/RootStore";
 // import styles from './Button.module.scss'
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -14,6 +15,7 @@ const Button: React.FC<ButtonProps> = ({
   className,
   loading,
   children,
+
   ...props
 }) => {
   return (
@@ -22,12 +24,20 @@ const Button: React.FC<ButtonProps> = ({
       className={cn(
         className,
         styles.button,
+        {
+          [styles.dark]: rootStore.theme.isDark,
+        },
         props.disabled && styles.button_disabled
       )}
       disabled={props.disabled || loading}
     >
       {loading && <Loader className={styles.button__loader} size="s" />}
-      <Text className={styles.button__text} tag="span" view="button">
+      <Text
+        color={rootStore.theme.isDark ? "default" : "default"}
+        className={styles.button__text}
+        tag="span"
+        view="button"
+      >
         {children}
       </Text>
     </button>

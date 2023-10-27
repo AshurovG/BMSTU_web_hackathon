@@ -1,9 +1,11 @@
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import styles from "./App.module.scss";
+import cn from "classnames";
 import MainPage from "pages/MainPage";
 import AuthForm from "pages/AuthForm";
 
 import rootStore from "../store/RootStore/instance";
+import classNames from "classnames";
 // import DetaliedPage from 'pages/DetaliedPage';
 
 if (!localStorage.getItem("isDark")) {
@@ -13,7 +15,7 @@ if (!localStorage.getItem("isDark")) {
 
 function App() {
   return (
-    <div className="app">
+    <div className={cn(styles.app)}>
       <HashRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />

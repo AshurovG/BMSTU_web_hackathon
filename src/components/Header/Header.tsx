@@ -70,19 +70,25 @@ const Header: React.FC = () => {
           {headerStore.isBurgerMenuOpen === false ? (
             <BurgerIcon
               className={styles.burger__icon}
-              color="accent"
+              color={rootStore.theme.isDark ? "dark" : "accent"}
               onClick={headerStore.setIsBurgerMenuOpen}
             />
           ) : (
             <div
-              className={styles.cancel__icon}
+              className={cn(styles.cancel__icon, {
+                [styles.dark]: rootStore.theme.isDark,
+              })}
               onClick={headerStore.setIsBurgerMenuOpen}
             ></div>
           )}
         </div>
 
         {headerStore.isBurgerMenuOpen && (
-          <div className={styles.burger__menu}>
+          <div
+            className={cn(styles.burger__menu, {
+              [styles.dark]: rootStore.theme.isDark,
+            })}
+          >
             <Link className={styles["burger__menu-item"]} to={"/"}>
               page1
             </Link>
