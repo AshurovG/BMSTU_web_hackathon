@@ -15,10 +15,12 @@
   &:focus-within {
     border-color: $brand;
   }
-
-  // & > input {
-  //     color: black;
-  // }
+  &.dark {
+    background-color: $dark-secondary-background;
+    &:focus-within {
+      border-color: $dark-brand;
+    }
+  }
 }
 
 .input-wrapper_disabled .input {
@@ -38,7 +40,6 @@
   width: 100%;
 
   font-family: "Nunito";
-  // font-family: Roboto, sans-serif;
   font-size: 16px;
   font-weight: 400;
 
@@ -49,5 +50,12 @@
   &-after {
     flex-shrink: 0;
     margin-left: $space-xxs;
+  }
+  &.dark {
+    color: $dark-text-primary;
+
+    &::placeholder {
+      color: $dark-text;
+    }
   }
 }

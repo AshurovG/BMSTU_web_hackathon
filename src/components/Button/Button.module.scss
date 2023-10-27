@@ -1,47 +1,54 @@
-@import 'styles/variables.scss';
-@import 'styles/styles.scss';
+@import "styles/variables.scss";
+@import "styles/styles.scss";
 
 .button {
-    color: $text-primary;
-    min-height: 52px;
-    padding: $space-s $space-l;
-    border-radius: $border-radius;
-    cursor: pointer;
-    transition: background-color .3s ease;
-    background-color: $brand;
-    border: none;
-    display: inline-flex;
-    align-items: center;
+  color: $text-primary;
+  min-height: 52px;
+  padding: $space-s $space-l;
+  border-radius: $border-radius;
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+  background-color: $brand;
+  border: none;
+  display: inline-flex;
+  align-items: center;
 
+  &:hover {
+    background-color: $brand-hover;
+    color: $default-color;
+  }
+
+  &:active {
+    background-color: $brand-active;
+    color: $default-color;
+  }
+
+  &:disabled {
+    pointer-events: none;
+  }
+
+  &.button_disabled {
+    background-color: $brand-disabled;
+    color: $default-color;
+  }
+
+  &__text {
+    transition: color 0.3s ease;
+    font-size: 18px;
+    color: $default-color;
+    margin: 0 auto;
+  }
+
+  &__loader {
+    transition: color 0.3s ease;
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+
+  &.dark {
+    background-color: $dark-brand;
     &:hover {
-        background-color: $brand-hover;
-        color: $default-color;
+      background-color: $dark-brand-hover;
     }
-
-    &:active {
-        background-color: $brand-active;
-        color: $default-color;
-    }
-
-    &:disabled {
-        pointer-events: none;
-    }
-
-    &.button_disabled {
-        background-color: $brand-disabled;
-        color: $default-color;
-    }
-
-    &__text {
-        transition: color .3s ease;
-        font-size: 18px;
-        color: $default-color;
-        margin: 0 auto;
-    }
-
-    &__loader {
-        transition: color .3s ease;
-        margin-right: 8px;
-        flex-shrink: 0;
-    }
+  }
 }

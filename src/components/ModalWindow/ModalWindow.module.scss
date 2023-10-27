@@ -1,89 +1,89 @@
-@import 'styles/variables.scss';
-@import 'styles/mixins.scss';
-@import 'styles/styles.scss';
+@import "styles/variables.scss";
+@import "styles/mixins.scss";
+@import "styles/styles.scss";
 
 .modal {
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0, 0, 0, 0.4);
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: .5s;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.5s;
+
+  &.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  &__content {
+    padding: 40px 20px;
+    border-radius: $border-radius;
+    background-color: #fff;
+    width: 30vw;
+    transform: scale(0.5);
+    transition: 0.4s all;
 
     &.active {
-        opacity: 1;
-        pointer-events: all;
+      transform: scale(1);
     }
-
-    &__content {
-        padding: 40px 20px;
-        border-radius: $border-radius;
-        background-color: #fff;
-        width: 30vw;
-        transform: scale(0.5);
-        transition: 0.4s all;
-
-        &.active {
-            transform: scale(1);
-        }
-    }
+  }
 }
 
 @keyframes rotate {
-    from {
-        transform: rotate(0deg) scale(1);
-    }
+  from {
+    transform: rotate(0deg) scale(1);
+  }
 
-    to {
-        transform: rotate((360deg)) scale(1.4);
-    }
+  to {
+    transform: rotate((360deg)) scale(1.4);
+  }
 }
 
 @include tablet {
-    .modal__content {
-        width: 40vw;
-    }
+  .modal__content {
+    width: 40vw;
+  }
 }
 
 @include largeTablet {
-    .modal__content {
-        width: 45vw;
-    }
+  .modal__content {
+    width: 45vw;
+  }
 }
-  
+
 @include mediumTablet {
-    .modal__content {
-        width: 50vw;
-    }
+  .modal__content {
+    width: 50vw;
+  }
 }
-  
+
 @include smallTablet {
-    .modal__content {
-        width: 60vw;
-    }
+  .modal__content {
+    width: 60vw;
+  }
 }
-  
+
 @include mobileLandscape {
-    .modal__content {
-        width: 75vw;
-    }
+  .modal__content {
+    width: 75vw;
+  }
 }
-  
+
 @include mobile {
-    .modal__content {
-        width: 75vw;
-        padding: 20px 20px;
-    }
+  .modal__content {
+    width: 75vw;
+    padding: 20px 20px;
+  }
 }
-  
+
 @include smallMobile {
-    .modal__content {
-        width: 85vw;
-    }
+  .modal__content {
+    width: 85vw;
+  }
 }

@@ -1,8 +1,10 @@
 import React from "react";
 import Sun from "../../assets/icons/sun.png";
 import Moon from "../../assets/icons/moon.png";
+import cn from "classnames";
 
 import styles from "./ThemeSwitcher.module.scss";
+import rootStore from "../../store/RootStore";
 
 export type ThemeSwitcherProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -20,6 +22,7 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
 }) => {
   const handler = (): void => {
     onChange(!isChecked);
+    rootStore.theme.setIsDark(!isChecked);
   };
 
   return (
@@ -27,11 +30,11 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
       <input
         type="checkbox"
         id="check"
-        className={styles.toggle}
+        className={cn(styles.toggle, { [styles.dark]: rootStore.theme.isDark })}
         onClick={handler}
         checked={isChecked}
       />
-      <label htmlFor="check">Dark Mode</label>
+      <label htmlFor="check"></label>
     </div>
   );
 };

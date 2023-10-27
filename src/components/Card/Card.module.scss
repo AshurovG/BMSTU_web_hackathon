@@ -1,10 +1,6 @@
 @import "styles/styles.scss";
 @import "styles/variables.scss";
 
-.dark {
-  background-color: red;
-}
-
 .card {
   cursor: pointer;
   width: 100%;
@@ -40,6 +36,9 @@
 
   &__body {
     padding: 24px 12px;
+    &.dark {
+      background-color: $dark-secondary-background;
+    }
   }
 
   &__caption {
