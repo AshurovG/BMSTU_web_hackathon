@@ -1,8 +1,9 @@
 // import axios from 'axios';
-import { action, computed, makeObservable, observable } from 'mobx';
+import { action, computed, makeObservable, observable, runInAction } from 'mobx';
 import { ILocalStore } from 'utils/useLocalStore';
 // import {UserInfo} from './types'
 import rootStore from 'store/RootStore/instance';
+import axios from 'axios';
 
 export interface IAuthFormStore {
     postUserData(): Promise<void>;
@@ -78,6 +79,7 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
         console.log('handle register')
         rootStore.userAuth.setIsLogin(true)
         this._isModalWindow = true;
+        this.postUserData()
         // localStorage.removeItem('savedRecipes');
       
         // this.validation();
@@ -281,31 +283,38 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
     }
 
     async postUserData(): Promise<void> {
-        // const url = `https://api.spoonacular.com/users/connect?apiKey=${apiKey}`;
-        // const requestBody = {
-        //     username: this._usernameValue,
-        //     fullname:  this._fullnameValue,
-        //     password: this.passwordValue,
-        // };
+        const url = `https://653bf551d5d6790f5ec7af38.mockapi.io/hack/user`;
+        const requestBody = {
+            // id: 2,
+            username: this._usernameValue,
+            fullname:  this._fullnameValue,
+            password: this.passwordValue,
+        };
 
-        // const response = await axios.post(url, requestBody);
+        const response = await axios.post(url, requestBody);
+        console.log(response.status)
 
-        // runInAction(() => {
-        //     if (response.status === 200) {
-        //         this._userInfo = {
-        //             username: this._usernameValue,
-        //             password: this._passwordValue,
-        //             fullname: this._fullnameValue,
-        //             spoonacularUsername: response.data.username,
-        //             spoonacularPassword: response.data.spoonacularPassword,
-        //             hash: response.data.hash
-        //         }
+        runInAction(() => {
 
-        //         localStorage.setItem('userInfo', JSON.stringify(this._userInfo));
-        //         localStorage.setItem('isLogin', 'true');
-        //         return
-        //     }
-        // })
+            if (response.status === 200 || response.status === 201) {
+                rootStore.userAuth.setUserInfo(requestBody)
+                return
+            }
+            // if (response.status === 200) {
+            //     this._userInfo = {
+            //         username: this._usernameValue,
+            //         password: this._passwordValue,
+            //         fullname: this._fullnameValue,
+            //         spoonacularUsername: response.data.username,
+            //         spoonacularPassword: response.data.spoonacularPassword,
+            //         hash: response.data.hash
+            //     }
+
+            //     localStorage.setItem('userInfo', JSON.stringify(this._userInfo));
+            //     localStorage.setItem('isLogin', 'true');
+            //     return
+            // }
+        })
     }
 
     reset(): void {
