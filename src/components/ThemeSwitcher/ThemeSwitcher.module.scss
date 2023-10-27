@@ -1,17 +1,21 @@
 @import "styles/variables.scss";
 
 .toggle-container {
-  margin-top: 70px;
+  // margin-top: 70px;
+  // width: 50px;
 }
 
 .toggle {
-  visibility: hidden;
+  display: none;
+  // position: relative;
   & + label {
     display: flex;
     align-items: center;
     font-size: 1.5em;
     cursor: pointer;
     color: $text-primary;
+
+    position: relative;
   }
 
   & + label::before {
@@ -20,7 +24,7 @@
     width: 2em;
     border-radius: 1em;
     background-color: $brand;
-    margin-right: 0.5em;
+    // margin-right: 0.5em;
     transition: background-color 250ms ease-in-out;
   }
 
@@ -31,7 +35,7 @@
       width: 2em;
       border-radius: 1em;
       background-color: #7961f1;
-      margin-right: 0.5em;
+      // margin-right: 0.5em;
       transition: background-color 250ms ease-in-out;
     }
   }
@@ -41,11 +45,11 @@
     height: 0.8em;
     width: 0.8em;
     border-radius: 1em;
-    // background-color: $default-color;
+
     background-image: url("../../assets/icons/sun.png");
     background-size: cover;
     position: absolute;
-    left: 0.2em;
+    right: 50%;
     transition: background-color 250ms ease-in-out, transform 250ms ease-in-out;
   }
 
@@ -59,7 +63,7 @@
       background-image: url("../../assets/icons/moon.png");
       background-size: cover;
       position: absolute;
-      left: 0.2em;
+      right: 50%;
       transition: background-color 250ms ease-in-out,
         transform 250ms ease-in-out;
     }

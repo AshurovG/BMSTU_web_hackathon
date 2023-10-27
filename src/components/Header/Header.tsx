@@ -15,13 +15,21 @@ import HeaderStore from "store/HeaderStore";
 import rootStore from "../../store/RootStore";
 import ProfileWindow from "components/ProfileWindow";
 
+import ThemeSwitcher from "components/ThemeSwitcher";
+import useLocalStorage from "use-local-storage";
+
 import cn from "classnames";
 
 const Header: React.FC = () => {
   const headerStore = useLocalStore(() => new HeaderStore());
 
+  const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [isDark, setIsDark] = useLocalStorage("isDark", preference);
+
   return (
-    <div className={styles.header}>
+    <div
+      className={cn(styles.header, { [styles.dark]: rootStore.theme.isDark })}
+    >
       <div className={styles.header__wrapper}>
         <LogoIcon />
         <Text className={styles.header__title} view="p-20">
@@ -38,7 +46,7 @@ const Header: React.FC = () => {
             page3
           </Link>
         </Text>
-
+        <ThemeSwitcher isChecked={isDark} onChange={() => setIsDark(!isDark)} />
         <div className={styles.icons}>
           {/* <FavoritesIcon className={cn(styles.favorite__icon, styles.icons__item)} /> */}
           {!rootStore.userAuth.isLogin ? (
