@@ -20,23 +20,6 @@ function App() {
                   <Route path=":id" element={<DetaliedPage />} />
                 </Route> */}
         </Routes>
-
-
-        {/* <Routes>
-                    <Route path='/' element={<RecipesPage />} />
-
-                    <Route path='/recipe'>
-                        <Route path=':id' element={<RecipesDetailedPage />} />
-                    </Route>
-
-                    <Route path='/mealplan' element={<MealPlanPage />}/>
-                    
-                    <Route path='/restaurants' element={<RestaurantsPage/>}/>
-
-                    <Route path='/auth' element={<AuthForm />}></Route>
-
-                    <Route path='*' element={<Navigate to="/" replace />} />
-                </Routes> */}
       </HashRouter>
     </div>
   );

@@ -63,3 +63,30 @@
     }
 }
 
+
+@include smallMobile {
+    .login__form {
+        max-width: 450px;
+    }
+}
+  
+@include extraSmallMobile {
+    .login__form {
+        max-width: 380px;
+        max-height: 500px;
+        padding: 25px;
+    }
+}
+  
+@include ultraSmallMobile {
+    .login__form {
+        max-width: 330px;
+    }
+}
+  
+@include tinyMobile {
+    .login__form{
+      max-width: 290px;
+    }
+}
+

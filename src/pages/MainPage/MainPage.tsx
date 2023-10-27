@@ -23,9 +23,6 @@ import ThemeSwitcher from "components/ThemeSwitcher";
 import useLocalStorage from "use-local-storage";
 
 const MainPage = () => {
-  const [value, setValue] = useState(false)
-
-
   return (
     <div className={styles.main__page}>
       <Header></Header>

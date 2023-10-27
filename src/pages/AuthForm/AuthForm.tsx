@@ -1,8 +1,5 @@
 import React, { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import cn from 'classnames';
-// import Text from 'components/Text/Text';
-// import Header from 'components/Header';
 import { Link } from 'react-router-dom';
 import Button from 'components/Button';
 import styles from './AuthForm.module.scss';
@@ -10,9 +7,7 @@ import Input from 'components/Input';
 import Text from 'components/Text';
 import Header from 'components/Header';
 import ModalWindow from 'components/ModalWindow';
-// import ModalWindow from 'components/ModalWindow';
 import SuccessIcon from 'components/icons/SuccessIcon';
-import LockingScreen from 'components/LockingScreen';
 import { useLocalStore } from 'utils/useLocalStore';
 import AuthFormStore from 'store/AuthFormStore';
 import { observer } from 'mobx-react-lite';
@@ -20,7 +15,6 @@ import rootStore from 'store/RootStore';
 
 const AuthForm: React.FC = () => {
     const authFormStore = useLocalStore(() => new AuthFormStore());
-    const [value, setValue] = React.useState(false)
     const navigate = useNavigate();
     const handleBackdropClick = () => {
         authFormStore.setIsModalWindow(false)
@@ -77,15 +71,6 @@ const AuthForm: React.FC = () => {
                     }
                 </div>
             </form>
-
-            {/* {!authFormStore.isLoginForm && (
-            <ModalWindow handleBackdropClick={handleBackdropClick} className={styles.modal} active={authFormStore.isModalWindow}>
-                <div onClick={() => authFormStore.setIsModalWindow(false)} className={styles.modal__content}>
-                    <h3 className={styles.modal__title}>Регистрация прошла успешно!</h3>
-                    <SuccessIcon/>
-                </div>
-            </ModalWindow>
-            )} */}
 
             {!authFormStore.isLoginForm && <ModalWindow handleBackdropClick={handleBackdropClick} className={styles.modal} active={authFormStore.isModalWindow}>
                 <h3 className={styles.modal__title}>Регистрация прошла успешно!</h3>
