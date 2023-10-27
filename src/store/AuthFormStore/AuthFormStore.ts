@@ -25,9 +25,6 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
     private _passwordValid = '';
     private _isValid = false;
 
-    // private _userInfo: UserInfo  = null;
-
-
     public setUsernameValue = (value: string): void => {
         this._usernameValue = value;
     };
@@ -59,20 +56,6 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
         event.preventDefault();
         this._isModalWindow = true;
         this.checkUserData()
-
-        // this.validation();
-        // if (this._usernameValid === '' && this._passwordValid === '') {
-        //     const userInfoString = localStorage.getItem('userInfo');
-        //     if (userInfoString) {
-        //         const userInfo = JSON.parse(userInfoString);
-        //         if (this._usernameValue === userInfo.username && this._passwordValue === userInfo.password) {
-        //             localStorage.setItem('isLogin', 'true');
-        //             this._isModalWindow = true;
-        //         } else {
-        //             this._isIncorrectError = true
-        //         }
-        //     }
-        // }
     };
 
     public handleRegisterButtonClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
@@ -80,27 +63,7 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
         console.log('handle register')
         this._isModalWindow = true;
         this.postUserData()
-        // localStorage.removeItem('savedRecipes');
-      
-        // this.validation();
-        // if (this._fullnameValid === '' && this._usernameValid === '' && this._passwordValid === '') {
-        //   const userInfoString = localStorage.getItem('userInfo');
-        //   if (userInfoString) {
-        //     const userInfo = JSON.parse(userInfoString);
-        //     if (this._usernameValue === userInfo.username) {
-        //       this._isExistError = true;
-        //     } else {
-        //       this._isModalWindow = true;
-        //     //   this.postUserData();
-        //     }
-        //   }
-        // }
       };
-
-    public handleCloseButtonClick = (): void => {
-        // rootStore.auth.setIsLogin(true)
-        console.log('close')
-    }
 
     public usernameValidation = (): void => {
         if ((this._usernameValue.length < 6 || this._usernameValue.length > 15) && this._usernameValue.length !== 0) {
@@ -112,41 +75,27 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
         } else {
           this._usernameValid = 'not error';
         }
-      
-        if (this._isLoginForm) {
-            if (this._usernameValid === 'not error' && this._passwordValid === 'not error') {
-                this._isValid = true;
-            } else {
-                this._isValid = false;
-            }
-        } else {
-            if (this._usernameValid === 'not error' && this._fullnameValid === 'not error' && this._passwordValid === 'not error') {
-                this._isValid = true;
-            } else {
-                this._isValid = false;
-            }
-        }
+
+        this.validation()
     }
     
     public fullnameValidation = (): void => {
         if (!this._isLoginForm) {
             const words = this._fullnameValue.split(" ");
-            console.log(words.length)
-            console.log(`words ${words}`)
-            if ((words.length < 2 || words.length > 5) && this._fullnameValue.length !== 0) {
-                this._fullnameValid = 'ФИО должно быть от 2 до 5 слов'
+            const russianLettersRegex = /^[а-яА-ЯёЁ\s]+$/;
+          
+            if (((words.length < 2 || words.length > 5) && this._fullnameValue.length !== 0) || (words.length > 1 && words[1].length === 0)) {
+              this._fullnameValid = 'ФИО должно быть от 2 до 5 слов';
+            } else if (!russianLettersRegex.test(this._fullnameValue)) {
+              this._fullnameValid = 'ФИО должно быть на русском языке';
             } else if (this._fullnameValue.length === 0) {
-                this._fullnameValid = 'Это обязательное поле'
+              this._fullnameValid = 'Это обязательное поле';
             } else {
-                this._fullnameValid = 'not error'
+              this._fullnameValid = 'not error';
             }
-            if (this._isLoginForm) {}
-            if (this._usernameValid === 'not error' && this._fullnameValid === 'not error' && this._passwordValid === 'not error') {
-                this._isValid = true;
-            } else {
-                this._isValid = false;
-            }
-        }
+          
+            this.validation();
+          }
         
     }
 
@@ -161,6 +110,11 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
           this._passwordValid = 'not error';
         }
         
+        this.validation()
+        
+    }
+
+    validation = (): void => {
         if (this._isLoginForm) {
             if (this._usernameValid === 'not error' && this._passwordValid === 'not error') {
                 this._isValid = true;
@@ -174,39 +128,7 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
                 this._isValid = false;
             }
         }
-        
     }
-
-    // public validation = (): void => {
-    //     if ((this._usernameValue.length < 6 || this._usernameValue.length > 15) && this._usernameValue.length !== 0) {
-    //         this._usernameValid = 'User name must be between 6 and 15 characters';
-    //     } else if (this._usernameValue.length === 0) {
-    //         this._usernameValid = 'This is a required field';
-    //     } else {
-    //         this._usernameValid = ''
-    //     }
-
-    //     if ((this._passwordValue.length < 8 || this._passwordValue.length > 20) && this._passwordValue.length !== 0) {
-    //         this._passwordValid = 'Password must be between 8 and 20 characters';
-    //     } else if (this._passwordValue.length === 0) {
-    //         this._passwordValid = 'This is a required field';
-    //     } else {
-    //         this._passwordValid = '';
-    //     }
-
-    //     if (!this._isLoginForm) {
-    //         const words = this._fullnameValue.split(" ");
-    //         console.log(words.length)
-    //         console.log(`words ${words}`)
-    //         if ((words.length < 2 || words.length > 5) && this._fullnameValue.length !== 0) {
-    //             this._fullnameValid = 'The name should be from 2 to 5 words'
-    //         } else if (this._fullnameValue.length === 0) {
-    //             this._fullnameValid = 'This is a required field'
-    //         } else {
-    //             this._fullnameValid = ''
-    //         }
-    //     }
-    // }
 
     constructor() {
         makeObservable<AuthFormStore, PrivateFields>(this, {
