@@ -94,8 +94,8 @@ const Header: React.FC = () => {
               }}
             >
               <ProfileWindow
-                username="asurov13"
-                fullname="Ашуров Георгий Витальевич"
+                username={rootStore.userAuth.userInfo.username}
+                fullname={rootStore.userAuth.userInfo.fullname}
                 onClick={() => rootStore.userAuth.setIsLogin(false)}
               />
             </motion.div>

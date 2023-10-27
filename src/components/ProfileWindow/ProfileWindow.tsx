@@ -9,7 +9,7 @@ export type ModalProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     onClick?: () => void;
     className?: string;
     username: string;
-    fullname: string;
+    fullname: string | undefined;
 };
 
 const ProfileWindow: React.FC<ModalProps> = ({
