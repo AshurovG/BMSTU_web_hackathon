@@ -13,8 +13,8 @@ const LogoIcon: React.FC<IconProps> = ({ className, color, width, height }) => {
             </g>
             <defs>
                 <linearGradient id="paint0_linear_508_1449" x1="15.0425" y1="2.27336" x2="20.4954" y2="33.1986" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#B5460F" />
-                    <stop offset="1" stopColor="#B5460F" />
+                    <stop stopColor="#518581" />
+                    <stop offset="1" stopColor="#518581" />
                 </linearGradient>
                 <clipPath id="clip0_508_1449">
                     <rect width="36" height="36" fill="white" />

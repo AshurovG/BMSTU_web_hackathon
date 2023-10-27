@@ -2,13 +2,13 @@
 import { action, computed, makeObservable, observable } from 'mobx';
 import { ILocalStore } from 'utils/useLocalStore';
 // import {UserInfo} from './types'
-// import rootStore from 'Store/RootStore/instance';
+import rootStore from 'store/RootStore/instance';
 
 export interface IAuthFormStore {
     postUserData(): Promise<void>;
 }
 
-export type PrivateFields = '_usernameValue' | '_fullnameValue' | '_passwordValue' | '_isLoginForm' | '_isModalWindow' | '_isExistError' | '_isIncorrectError' | '_usernameValid' | '_fullnameValid' | '_passwordValid';
+export type PrivateFields = '_usernameValue' | '_fullnameValue' | '_passwordValue' | '_isLoginForm' | '_isModalWindow' | '_isExistError' | '_isIncorrectError' | '_usernameValid' | '_fullnameValid' | '_passwordValid' | '_isValid';
 
 export default class AuthFormStore implements IAuthFormStore, ILocalStore {
     private _usernameValue = '';
@@ -21,6 +21,7 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
     private _usernameValid = '';
     private _fullnameValid = '';
     private _passwordValid = '';
+    private _isValid = false;
 
     // private _userInfo: UserInfo  = null;
 
@@ -38,11 +39,24 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
     };
 
     public setIsLoginForm = (): void => {
+        this._usernameValue = '';
+        this._fullnameValue = '';
+        this._passwordValue = '';
+        this._usernameValid = '';
+        this._fullnameValid = '';
+        this._passwordValid = '';
+        this._isValid = false;
         this._isLoginForm = !this._isLoginForm;
+    };
+
+    public setIsModalWindow = (value: boolean): void => {
+        this._isModalWindow = value;
     };
 
     public handleLoginButtonClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
         event.preventDefault();
+        rootStore.userAuth.setIsLogin(true)
+        this._isModalWindow = true;
 
         // this.validation();
         // if (this._usernameValid === '' && this._passwordValid === '') {
@@ -61,6 +75,9 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
 
     public handleRegisterButtonClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
         event.preventDefault();
+        console.log('handle register')
+        rootStore.userAuth.setIsLogin(true)
+        this._isModalWindow = true;
         // localStorage.removeItem('savedRecipes');
       
         // this.validation();
@@ -85,11 +102,27 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
 
     public usernameValidation = (): void => {
         if ((this._usernameValue.length < 6 || this._usernameValue.length > 15) && this._usernameValue.length !== 0) {
-            this._usernameValid = 'User name must be between 6 and 15 characters';
+          this._usernameValid = 'Имя пользователя должно быть от 6 до 15 символов';
         } else if (this._usernameValue.length === 0) {
-            this._usernameValid = 'This is a required field';
+          this._usernameValid = 'Это обязательное поле';
+        } else if (!/^[a-zA-Z0-9]+$/.test(this._usernameValue)) {
+          this._usernameValid = 'Имя пользователя должно состоять только из латинских символов и цифр';
         } else {
-            this._usernameValid = ''
+          this._usernameValid = 'not error';
+        }
+      
+        if (this._isLoginForm) {
+            if (this._usernameValid === 'not error' && this._passwordValid === 'not error') {
+                this._isValid = true;
+            } else {
+                this._isValid = false;
+            }
+        } else {
+            if (this._usernameValid === 'not error' && this._fullnameValid === 'not error' && this._passwordValid === 'not error') {
+                this._isValid = true;
+            } else {
+                this._isValid = false;
+            }
         }
     }
     
@@ -99,23 +132,47 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
             console.log(words.length)
             console.log(`words ${words}`)
             if ((words.length < 2 || words.length > 5) && this._fullnameValue.length !== 0) {
-                this._fullnameValid = 'The name should be from 2 to 5 words'
+                this._fullnameValid = 'ФИО должно быть от 2 до 5 слов'
             } else if (this._fullnameValue.length === 0) {
-                this._fullnameValid = 'This is a required field'
+                this._fullnameValid = 'Это обязательное поле'
             } else {
-                this._fullnameValid = ''
+                this._fullnameValid = 'not error'
+            }
+            if (this._isLoginForm) {}
+            if (this._usernameValid === 'not error' && this._fullnameValid === 'not error' && this._passwordValid === 'not error') {
+                this._isValid = true;
+            } else {
+                this._isValid = false;
             }
         }
+        
     }
 
     public passwordValidation = (): void => {
         if ((this._passwordValue.length < 8 || this._passwordValue.length > 20) && this._passwordValue.length !== 0) {
-            this._passwordValid = 'Password must be between 8 and 20 characters';
+          this._passwordValid = 'Пароль должен быть от 8 до 20 символов';
         } else if (this._passwordValue.length === 0) {
-            this._passwordValid = 'This is a required field';
+          this._passwordValid = 'Это обязательное поле';
+        } else if (!/\d/.test(this._passwordValue) || !/[a-zA-Z]/.test(this._passwordValue)) {
+          this._passwordValid = 'Пароль должен содержать латинские символы и цифры';
         } else {
-            this._passwordValid = '';
+          this._passwordValid = 'not error';
         }
+        
+        if (this._isLoginForm) {
+            if (this._usernameValid === 'not error' && this._passwordValid === 'not error') {
+                this._isValid = true;
+            } else {
+                this._isValid = false;
+            }
+        } else {
+            if (this._usernameValid === 'not error' && this._fullnameValid === 'not error' && this._passwordValid === 'not error') {
+                this._isValid = true;
+            } else {
+                this._isValid = false;
+            }
+        }
+        
     }
 
     // public validation = (): void => {
@@ -161,6 +218,7 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
             _usernameValid: observable,
             _fullnameValid: observable,
             _passwordValid: observable,
+            _isValid: observable,
             usernameValue: computed,
             fullnameValue: computed,
             passwordValue: computed,
@@ -171,10 +229,11 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
             usernameValid: computed,
             fullnameValid: computed,
             passwordValid: computed,
+            isValid: computed,
             setUsernameValue: action,
             setFullnameValue: action,
             setPasswordValue: action,
-            setIsLoginForm: action
+            setIsLoginForm: action,
         })
     };
 
@@ -215,6 +274,10 @@ export default class AuthFormStore implements IAuthFormStore, ILocalStore {
 
     get passwordValid(): string {
         return this._passwordValid;
+    }
+
+    get isValid(): boolean {
+        return this._isValid;
     }
 
     async postUserData(): Promise<void> {

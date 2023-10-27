@@ -1,6 +1,7 @@
 import * as React from 'react';
 // import cn from 'classnames';
 import { observer } from 'mobx-react-lite';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom'
 import Text from '../Text/Text';
 import LogoIcon from 'components/icons/LogoIcon';
@@ -8,8 +9,10 @@ import styles from './Header.module.scss';
 // import FavoritesIcon from 'components/icons/FavoritesIcon';
 import AccountIcon from 'components/icons/AccountIcon';
 import BurgerIcon from 'components/icons/BurgerIcon';
+import ProfileWindow from 'components/ProfileWindow';
 import { useLocalStore } from 'utils/useLocalStore';
 import HeaderStore from 'store/HeaderStore';
+import rootStore from 'store/RootStore/instance';
 
 const Header: React.FC = () => {
     const headerStore = useLocalStore(() => new HeaderStore());
@@ -26,12 +29,35 @@ const Header: React.FC = () => {
                 </Text>
 
                 <div className={styles.icons}>
-                    {/* <FavoritesIcon className={cn(styles.favorite__icon, styles.icons__item)} /> */}
-                    <Link className={styles.profile__link} to={'/auth'}><AccountIcon className={styles.icons__item} onClick={headerStore.setIsAuthFormOpen}/></Link>
+                    {!rootStore.userAuth.isLogin 
+                    ? <Link className={styles.profile__link} to={'/auth'}><AccountIcon className={styles.icons__item} onClick={headerStore.setIsAuthFormOpen}/></Link>
+                    : <span onClick={headerStore.setIsProfileButtonClicked} className={styles.profile__link}><AccountIcon className={styles.icons__item} onClick={headerStore.setIsAuthFormOpen}/></span>
+                    }
                     {headerStore.isBurgerMenuOpen === false
                         ? <BurgerIcon className={styles.burger__icon} color='accent' onClick={headerStore.setIsBurgerMenuOpen} />
                         : <div className={styles.cancel__icon} onClick={headerStore.setIsBurgerMenuOpen}></div>}
                 </div>
+
+                <AnimatePresence>
+                {rootStore.userAuth.isLogin && headerStore.isProfileButtonClicked && (
+                    <motion.div
+                    initial={{ opacity: 0, y: -50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -50 }}
+                    transition={{ duration: 0.3 }}
+                    style={{
+                        marginTop: 350,
+                        position: 'absolute',
+                        right: 0
+                    }}
+                    >
+                    <ProfileWindow
+                    username="asurov13"
+                    fullname="Ашуров Георгий Витальевич"
+                    onClick={() => rootStore.userAuth.setIsLogin(false)}
+                    />
+                    </motion.div>)}
+                </AnimatePresence>
 
                 {headerStore.isBurgerMenuOpen &&
                 <div className={styles.burger__menu}>
@@ -39,6 +65,8 @@ const Header: React.FC = () => {
                     <Link className={styles['burger__menu-item']} to={`/`}>page2</Link>
                     <Link className={styles['burger__menu-item']} to={`/`}>page3</Link>
                 </div>}
+
+                
             </div>
 
 

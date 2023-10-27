@@ -1,35 +1,32 @@
-import * as React from 'react';
+import React, { MouseEvent, MouseEventHandler } from 'react';
 import cn from 'classnames'
 import styles from './ModalWindow.module.scss';
-import SuccessIcon from 'components/icons/SuccessIcon';
-import Button from 'components/Button';
-import { Link } from 'react-router-dom';
 
 export type ModalProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-    children?: React.ReactNode;
-    title: string;
-    to?: string;
-    onClick?: () => void;
+    active: boolean;
+    handleBackdropClick: () => void;
+    children: React.ReactNode;
+    className?: string;
 };
 
+
+
 const ModalWindow: React.FC<ModalProps> = ({
-    className,
-    title,
+    active,
     children,
-    to,
-    onClick
+    className,
+    handleBackdropClick
 }) => {
+
+    const handleClick: MouseEventHandler<HTMLDivElement> = (e: MouseEvent<HTMLDivElement>) => {
+        e.stopPropagation();
+    };
+
     return (
-        <div className={cn(styles.modal, className)}>
-            <div className={styles.modal__wrapper}>
-                <div className={styles['modal__title-block']}>
-                    <h2 className={styles.modal__title}>{title}</h2>
-                    {children}
-                </div>
-                {to ? <Link to={to}><Button onClick={onClick} className={styles.modal__btn}>Close</Button></Link>
-                : <Button onClick={onClick} className={styles.modal__btn}>Close</Button>}        
+        <div onClick={handleBackdropClick} className={`${styles.modal} ${active === true ? styles.active : ''}`}>
+            <div onClick={handleClick} className={active === false ? cn(styles.modal__content, className) : cn(styles.modal__content, styles.active, className)}>
+                {children}
             </div>
-            
         </div>
     )
 };

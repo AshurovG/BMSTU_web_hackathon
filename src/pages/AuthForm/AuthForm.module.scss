@@ -25,7 +25,7 @@
     width: 500px;
     height: 530px;
     background-color: rgb(239, 239, 239);
-    padding: 60px;
+    padding: 30px;
     border-radius: $border-radius;
     box-shadow: $box-shadow;
 
@@ -47,6 +47,46 @@
         &:hover {
             text-decoration: underline;
         }
+    }
+}
+
+.modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+
+    &__title {
+        text-align: center;
+        font-size: 22px;
+        
+    }
+}
+
+
+@include smallMobile {
+    .login__form {
+        max-width: 450px;
+    }
+}
+  
+@include extraSmallMobile {
+    .login__form {
+        max-width: 380px;
+        max-height: 500px;
+        padding: 25px;
+    }
+}
+  
+@include ultraSmallMobile {
+    .login__form {
+        max-width: 330px;
+    }
+}
+  
+@include tinyMobile {
+    .login__form{
+      max-width: 290px;
     }
 }
 
