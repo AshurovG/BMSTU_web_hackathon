@@ -10,4 +10,10 @@ export type RoverData = {
     y: number;
     angle: number;
     charge: number;
-  };
+};
+
+export type MoveData = {
+  uuid: string;
+  // move: 'up' | 'down' | 'left' | 'right' | '';
+  move: string;
+};

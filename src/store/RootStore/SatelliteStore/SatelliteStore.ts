@@ -1,13 +1,13 @@
 import { action, computed, makeObservable, observable, runInAction, observe } from 'mobx';
 
-import { RoverData } from './types';
+import { RoverData, MoveData } from './types';
 
 export interface ISatelliteStore {
-    putRover(): Promise<void>;
+    putMove(): Promise<void>;
     getInfo(): Promise<void>;
 }
 
-type PrivateFields = '_rover'
+type PrivateFields = '_rover' | '_move';
 
 export default class SatelliteStore implements ISatelliteStore {
     private _rover = {
@@ -17,6 +17,11 @@ export default class SatelliteStore implements ISatelliteStore {
         y: 0,
         angle: 0,
         charge: 0,
+    }
+
+    private _move = {
+        uuid: '',
+        move: ''
     }
 
     private _socket: WebSocket | null = null;
@@ -43,17 +48,23 @@ export default class SatelliteStore implements ISatelliteStore {
 
       }
 
-    public setRover = (value: RoverData) => {
-        this._rover = value;
-        this.putRover()
+    // public setRover = (value: RoverData) => {
+    //     this._rover = value;
+    //     this.putRover()
+    // }
+    
+    public setMove = (value: MoveData) => {
+        this._move = value;
+        this.putMove()
     }
 
 
     constructor() {
         makeObservable<SatelliteStore, PrivateFields>(this, {
             _rover: observable,
+            _move: observable,
             rover: computed,
-            setRover: action
+            // setRover: action
         });
         this._initWebSocket();
     }    
@@ -62,10 +73,15 @@ export default class SatelliteStore implements ISatelliteStore {
         return this._rover;
     }
 
-    async putRover(): Promise<void> {
+    get move(): MoveData {
+        return this._move;
+    }
+
+    async putMove(): Promise<void> {
         if (this._socket && this._socket.readyState === WebSocket.OPEN) {
-        //   const payload = JSON.stringify(this._position);
-        //   this._socket.send(payload);
+            
+          const payload = JSON.stringify(this._move);
+          this._socket.send(payload);
         }
     }
     

@@ -36,7 +36,8 @@ const MainPage = () => {
         })}
       >
         <Header></Header>
-        <div className={styles["main__page-wrapper"]}></div>
+        <div className={styles["main__page-wrapper"]}>
+        </div>
       </div>
     </>
   );
