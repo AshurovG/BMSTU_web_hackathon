@@ -36,10 +36,10 @@ const ProfileWindow: React.FC = () => {
         </div>
 
         <div className={styles.info__manage}>
-          <Button>W</Button>
-          <Button>S</Button>
-          <Button>A</Button>
-          <Button>D</Button>
+          <Button onClick={() => rootStore.satellite.setMove({uuid: rootStore.satellite.rover.uuid, move: 'up'})}>W</Button>
+          <Button onClick={() => rootStore.satellite.setMove({uuid: rootStore.satellite.rover.uuid, move: 'down'})}>S</Button>
+          <Button onClick={() => rootStore.satellite.setMove({uuid: rootStore.satellite.rover.uuid, move: 'left'})}>A</Button>
+          <Button onClick={() => rootStore.satellite.setMove({uuid: rootStore.satellite.rover.uuid, move: 'right'})}>D</Button>
         </div>
       </div>
     </div>
