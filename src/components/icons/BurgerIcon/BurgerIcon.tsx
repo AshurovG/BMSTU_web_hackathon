@@ -11,7 +11,7 @@ const BurgerIcon: React.FC<IconProps> = ({
 }) => {
   let colorResult: string = "";
   if (color === "primary") {
-    colorResult = "#000";
+    colorResult = "#fff";
   } else if (color === "secondary") {
     colorResult = "#AFADB5";
   } else if (color === "dark") {

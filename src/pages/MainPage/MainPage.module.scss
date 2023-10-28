@@ -3,7 +3,10 @@
   width: 100%;
   min-height: 100vh;
   overflow: auto;
-  background-color: $background-color;
+  // background-color: $background-color;
+
+  background-image: url("../../assets/icons/backimg.webp");
+  background-size: cover;
 
   &.dark {
     background-color: $dark-background;

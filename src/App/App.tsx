@@ -10,18 +10,12 @@ import useLocalStorage from "use-local-storage";
 // import DetaliedPage from 'pages/DetaliedPage';
 
 function App() {
-  const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const [isDark, setIsDark] = useLocalStorage("isDark", preference);
   return (
     <div className={cn(styles.app)}>
       <HashRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
-
-          {/* <Route path="/subscription">
-                  <Route path=":id" element={<DetaliedPage />} />
-                </Route> */}
         </Routes>
       </HashRouter>
     </div>
