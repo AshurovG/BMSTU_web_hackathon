@@ -26,8 +26,6 @@ import rootStore from "store/RootStore";
 import MultiDropdown from "components/DropDown";
 
 const MainPage = () => {
-  const [input, setInput] = useState("");
-  const [checked, setChecked] = useState(false);
   return (
     <>
       <div
@@ -41,7 +39,7 @@ const MainPage = () => {
             <h1 className={styles["main__page-title"]}>Панель управления космическим устройством<br/> EUROPA AQUATIC EXPLORER </h1>
             <h2 className={styles["main__page-subtitle"]}>Чтобы управлять устройством нажмите на кнопку</h2>
             <Link to='/satellite'>
-              <Button className={styles['main__page-btn']}>
+            <Button className={styles['main__page-btn']}>
                 <svg width="60px" height="60px" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M43.3252 239.768C72.7365 236.126 100.343 205.529 126.88 200.224C156.411 194.323 376.233 189.119 381.321 224.704C383.558 240.339 379.926 258.269 366.242 267.385C337.21 286.721 179.562 292.892 143.215 286.841C115.975 282.305 66.1265 248.523 49.6044 241.649" stroke="#fff" stroke-opacity="0.9" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
                   <path d="M131.756 208.131C137.859 229.736 135.668 253.809 132.884 275.583" stroke="#fff" stroke-opacity="0.9" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
@@ -67,5 +65,7 @@ const MainPage = () => {
     </>
   );
 };
+
+
 
 export default MainPage;
