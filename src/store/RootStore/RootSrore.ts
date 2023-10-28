@@ -1,11 +1,11 @@
 import QueryParamsStore from "./QueryParamsStore";
 import PreviousUrlStore from "./PreviousUrlStore";
 import ThemeStore from "./ThemeStore";
-import UserAuthStore from "./UserAuthStore";
+import SatelliteStore from "./SatelliteStore";
 
 export default class RootStore {
   readonly query = new QueryParamsStore();
   prevUrl = new PreviousUrlStore();
-  userAuth = new UserAuthStore();
+  satellite = new SatelliteStore();
   theme = new ThemeStore();
 }

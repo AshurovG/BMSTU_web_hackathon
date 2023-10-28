@@ -1,0 +1,18 @@
+@import "../../styles//variables.scss";
+.main__page {
+  width: 100%;
+  min-height: 100vh;
+  overflow: auto;
+  background-color: $background-color;
+
+  &.dark {
+    background-color: $dark-background;
+  }
+
+  &-wrapper {
+    max-width: 1240px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 100px;
+  }
+}
