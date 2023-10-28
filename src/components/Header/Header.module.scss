@@ -8,7 +8,10 @@
   z-index: 1000;
   width: 100%;
   height: 84px;
-  background-color: $default-color;
+  // background-color: none;
+  // background-image: url("../../assets/icons/mars.jpg");
+  color: #fff;
+  border-bottom: 1px solid #fff;
 
   &__wrapper {
     position: relative;
@@ -21,13 +24,19 @@
     margin: 0 auto;
   }
 
-  &__title {
-    font-size: 20px;
-    color: $text-primary;
+  &__titleblock {
+    font-family: "Source Code Pro";
+    font-size: 40px;
     font-weight: 700;
     margin-left: 20px;
-    &.dark {
-      color: #fff;
+    color: #fff;
+    // line-height: 40px;
+
+    display: flex;
+    align-items: flex-end;
+
+    &_title {
+      line-height: 40px;
     }
   }
 
@@ -49,13 +58,6 @@
     &:hover {
       color: $brand;
     }
-    &.dark {
-      color: #fff;
-    }
-  }
-
-  &.dark {
-    background-color: $dark-secondary-background;
   }
 }
 
@@ -74,9 +76,9 @@
   }
 }
 
-.burger__icon {
-  display: none;
-}
+// .burger__icon {
+//   display: none;
+// }
 
 .cancel__icon {
   display: none;
@@ -84,6 +86,64 @@
 
 .burger__menu {
   display: none;
+}
+
+.burger__menu {
+  display: block;
+  z-index: 1000;
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 200px;
+  height: auto;
+  background-color: none;
+  border: 1px solid #fff;
+  display: flex;
+  flex-direction: column;
+  box-shadow: $box-shadow;
+  border-radius: $border-radius;
+
+  &-item {
+    padding: $space-m;
+    color: $default-color;
+    font-weight: 900;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    text-decoration: none;
+
+    &:hover {
+      color: $text-secondary;
+    }
+  }
+}
+
+.cancel__icon {
+  display: inline-block;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  margin-bottom: 5px;
+
+  &.dark {
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 2px;
+      background-color: #fff;
+      transform-origin: center;
+    }
+  }
+}
+.cancel__icon::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.cancel__icon::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 // .profile__link {
@@ -118,28 +178,6 @@
     margin-bottom: 5px;
   }
 
-  .cancel__icon {
-    display: inline-block;
-    position: relative;
-    width: 24px;
-    height: 24px;
-    margin-bottom: 5px;
-
-    &.dark {
-      &::before,
-      &::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 100%;
-        height: 2px;
-        background-color: $dark-brand;
-        transform-origin: center;
-      }
-    }
-  }
-
   .cancel__icon::before,
   .cancel__icon::after {
     content: "";
@@ -152,46 +190,8 @@
     transform-origin: center;
   }
 
-  .cancel__icon::before {
-    transform: translate(-50%, -50%) rotate(45deg);
-  }
-
-  .cancel__icon::after {
-    transform: translate(-50%, -50%) rotate(-45deg);
-  }
-
   .header__block {
     display: none;
-  }
-
-  .burger__menu {
-    display: block;
-    z-index: 1000;
-    position: absolute;
-    top: calc(100% + 10px);
-    right: 0;
-    width: 200px;
-    height: auto;
-    background-color: $brand;
-    display: flex;
-    flex-direction: column;
-    box-shadow: $box-shadow;
-    border-radius: $border-radius;
-
-    &-item {
-      padding: $space-m;
-      color: $default-color;
-      cursor: pointer;
-      transition: color 0.2s ease;
-
-      &:hover {
-        color: $text-secondary;
-      }
-    }
-
-    &.dark {
-      background-color: $dark-secondary-background;
-    }
   }
 }
 
