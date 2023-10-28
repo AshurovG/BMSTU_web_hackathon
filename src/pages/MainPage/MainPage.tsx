@@ -24,6 +24,9 @@ import useLocalStorage from "use-local-storage";
 import userSvg from "assets/icons/sun.png";
 import rootStore from "store/RootStore";
 import MultiDropdown from "components/DropDown";
+import ThreeD from "components/ThreeD";
+import HightMap from "components/HightMap";
+import MapChart from "components/HightMap";
 
 const MainPage = () => {
   const [input, setInput] = useState("");
@@ -37,6 +40,7 @@ const MainPage = () => {
       >
         <Header></Header>
         <div className={styles["main__page-wrapper"]}>
+          <MapChart />
         </div>
       </div>
     </>
