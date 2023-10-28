@@ -1,5 +1,7 @@
 @import "../../styles//variables.scss";
 .main__page {
+  background-image: url("../../assets/icons/backimg.webp");
+  background-size: cover;
   width: 100%;
   min-height: 100vh;
   overflow: auto;

@@ -1,0 +1,15 @@
+.canvas_block {
+  //   background-image: url("../../assets/icons/backimg.webp");
+  // background-size: cover;
+  // background-color: blue;
+  background-color: red;
+  border: 2px solid blue;
+}
+
+canvas {
+  background-image: url("../../assets/icons/backimg.webp");
+  background-size: cover;
+
+  height: 500px;
+  width: 500px;
+}
