@@ -55,6 +55,7 @@ export default class SatelliteStore implements ISatelliteStore {
     
     public setMove = (value: MoveData) => {
         this._move = value;
+        console.log('set move', value.move)
         this.putMove()
     }
 
