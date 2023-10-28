@@ -51,14 +51,12 @@ const Header: React.FC = () => {
           {headerStore.isBurgerMenuOpen === false ? (
             <BurgerIcon
               className={styles.burger__icon}
-              color={rootStore.theme.isDark ? "primary" : "accent"}
+              color={"primary"}
               onClick={headerStore.setIsBurgerMenuOpen}
             />
           ) : (
             <div
-              className={cn(styles.cancel__icon, {
-                [styles.dark]: rootStore.theme.isDark,
-              })}
+              className={cn(styles.cancel__icon)}
               onClick={headerStore.setIsBurgerMenuOpen}
             ></div>
           )}
@@ -80,7 +78,7 @@ const Header: React.FC = () => {
                 [styles.dark]: rootStore.theme.isDark,
               })}
             >
-              <Link className={styles["burger__menu-item"]} to={"/"}>
+              <Link className={styles["burger__menu-item"]} to={"/satellite"}>
                 Rover
               </Link>
               <Link className={styles["burger__menu-item"]} to={`/`}>

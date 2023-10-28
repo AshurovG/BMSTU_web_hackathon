@@ -5,7 +5,7 @@ import Header from "components/Header";
 import ProfileWindow from "components/ProfileWindow";
 import ModalWindow from "components/ModalWindow";
 import RoverInfo from "components/RoverInfo";
-import { observer } from 'mobx-react-lite';
+import { observer } from "mobx-react-lite";
 // import Button from "components/Button";
 // import AuthForm from "components/AuthForm";
 // import LockingScreen from "components/LockingScreen";
@@ -24,6 +24,11 @@ import useLocalStorage from "use-local-storage";
 import userSvg from "assets/icons/sun.png";
 import rootStore from "store/RootStore";
 import MultiDropdown from "components/DropDown";
+import Map from "components/Map";
+
+import Canvas from "components/Canvas";
+
+const point = { x: 95, y: 95 };
 
 const SatellitePage = () => {
   return (
@@ -33,8 +38,7 @@ const SatellitePage = () => {
       })}
     >
       <Header></Header>
-      <div className={styles["main__page-wrapper"]}>
-      </div>
+      <div className={styles["main__page-wrapper"]}></div>
     </div>
   );
 };
