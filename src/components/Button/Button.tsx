@@ -24,9 +24,9 @@ const Button: React.FC<ButtonProps> = ({
       className={cn(
         className,
         styles.button,
-        {
-          [styles.dark]: rootStore.theme.isDark,
-        },
+        // {
+        //   [styles.dark]: rootStore.theme.isDark,
+        // },
         props.disabled && styles.button_disabled
       )}
       disabled={props.disabled || loading}

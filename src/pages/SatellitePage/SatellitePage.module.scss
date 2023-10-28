@@ -1,20 +1,21 @@
 @import "../../styles//variables.scss";
-.main__page {
+.sat__page {
   background-image: url("../../assets/icons/backimg.webp");
   background-size: cover;
   width: 100%;
   min-height: 100vh;
   overflow: auto;
-  background-color: #000;
+  // background-color: #ff0404;
 
-  &.dark {
-    background-color: $dark-background;
-  }
-
-  &-wrapper {
+  &_wrapper {
     max-width: 1240px;
     width: 100%;
-    margin: 0 auto;
+    margin: 0px auto;
     margin-top: 100px;
+  }
+  &_rover {
+    margin-top: 110px;
+    display: flex;
+    justify-content: space-between;
   }
 }
