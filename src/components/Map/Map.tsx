@@ -1,21 +1,23 @@
 import React from "react";
 import styles from "./Map.module.scss";
+import rootStore from "store/RootStore";
+import { observer } from "mobx-react-lite";
 
-interface Map {
-  x: number;
-  y: number;
-}
+// interface Map {
+//   x: number;
+//   y: number;
+// }
 
-interface MapProps {
-  point: Map;
-}
+// interface MapProps {
+//   point: Map;
+// }
 
-const Map: React.FC<MapProps> = ({ point }) => {
+const Map = () => {
   const mapWidth = 100; // Ширина карты в метрах
   const mapHeight = 100; // Высота карты в метрах
 
-  const pointX = (point.x / mapWidth) * 100; // Преобразование координаты X в проценты
-  const pointY = (point.y / mapHeight) * 100; // Преобразование координаты Y в проценты
+  const pointX = (rootStore.satellite.rover.x / mapWidth) * 100; // Преобразование координаты X в проценты
+  const pointY = (rootStore.satellite.rover.y / mapHeight) * 100; // Преобразование координаты Y в проценты
 
   return (
     <div className={styles.map}>
@@ -30,4 +32,4 @@ const Map: React.FC<MapProps> = ({ point }) => {
   );
 };
 
-export default Map;
+export default observer(Map);

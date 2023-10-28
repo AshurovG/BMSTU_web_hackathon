@@ -27,11 +27,9 @@ const ProfileWindow: React.FC = () => {
           <Button className={styles.info__actions_button}>
             Включить освещение
           </Button>
+          <Button className={styles.info__actions_button}>Анализ почвы</Button>
           <Button className={styles.info__actions_button}>
-            Включить освещение
-          </Button>
-          <Button className={styles.info__actions_button}>
-            Включить освещение
+            Собрать материал
           </Button>
         </div>
 
