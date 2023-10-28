@@ -33,12 +33,17 @@ const point = { x: 95, y: 95 };
 const SatellitePage = () => {
   return (
     <div
-      className={cn(styles.main__page, {
+      className={cn(styles.sat__page, {
         [styles.dark]: rootStore.theme.isDark,
       })}
     >
       <Header></Header>
-      <div className={styles["main__page-wrapper"]}></div>
+      <div className={styles.sat__page_wrapper}>
+        <div className={styles.sat__page_rover}>
+          <Map point={point} />
+          <RoverInfo />
+        </div>
+      </div>
     </div>
   );
 };
