@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Header from "components/Header";
 import ProfileWindow from "components/ProfileWindow";
 import ModalWindow from "components/ModalWindow";
+import RoverInfo from "components/RoverInfo";
+import { observer } from 'mobx-react-lite';
 // import Button from "components/Button";
 // import AuthForm from "components/AuthForm";
 // import LockingScreen from "components/LockingScreen";
@@ -32,10 +34,9 @@ const SatellitePage = () => {
     >
       <Header></Header>
       <div className={styles["main__page-wrapper"]}>
-      SatellitePage !!!
       </div>
     </div>
   );
 };
 
-export default SatellitePage;
+export default observer(SatellitePage);

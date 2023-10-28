@@ -1,0 +1,58 @@
+@import "styles/variables.scss";
+@import "styles/mixins.scss";
+@import "styles/styles.scss";
+
+.info {
+  width: 300px;
+  color: $default_color;
+  background-color: rgba(0, 0, 0, 0);
+
+  &__content {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  &__manage {
+    display: grid;
+    margin-top: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    justify-items: center;
+  }
+
+  &__manage Button {
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff;
+    border: none;
+    color: #000000;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  &__manage Button:nth-child(1) {
+    grid-column: 2;
+  }
+  
+  &__manage Button:nth-child(2) {
+    grid-row: 2;
+  }
+  
+  &__manage Button:nth-child(3) {
+    grid-row: 2;
+    grid-column: 1;
+  }
+  
+  &__manage Button:nth-child(4) {
+    grid-row: 2;
+    grid-column: 3;
+  }
+}

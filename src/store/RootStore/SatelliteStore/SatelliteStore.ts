@@ -1,18 +1,22 @@
-import { action, computed, makeObservable, observable, runInAction } from 'mobx';
+import { action, computed, makeObservable, observable, runInAction, observe } from 'mobx';
 
-import { Position, ServerData } from './types';
+import { RoverData } from './types';
 
 export interface ISatelliteStore {
-    putPosition(): Promise<void>;
+    putRover(): Promise<void>;
     getInfo(): Promise<void>;
 }
 
-type PrivateFields = '_position';
+type PrivateFields = '_rover'
 
 export default class SatelliteStore implements ISatelliteStore {
-    private _position = {
-        xPosition: 0,
-        yPosition: 0
+    private _rover = {
+        uuid: '',
+        name: '',
+        x: 0,
+        y: 0,
+        angle: 0,
+        charge: 0,
     }
 
     private _socket: WebSocket | null = null;
@@ -23,12 +27,12 @@ export default class SatelliteStore implements ISatelliteStore {
           console.log('WebSocket соединение открыто');
         };
     
-        this._socket.onmessage = (event: MessageEvent<ServerData>) => {
+        this._socket.onmessage = (event) => {
             console.log('Получено сообщение:', event.data);
             
             runInAction(() => {
-                this._position = event.data;
-                console.log('data', this._position)
+                this._rover = JSON.parse(event.data);
+                console.log('data', this._rover)
             });
           };
     
@@ -39,37 +43,37 @@ export default class SatelliteStore implements ISatelliteStore {
 
       }
 
-    public setPosition = (value: Position) => {
-        this._position = value;
-        this.putPosition()
+    public setRover = (value: RoverData) => {
+        this._rover = value;
+        this.putRover()
     }
+
 
     constructor() {
         makeObservable<SatelliteStore, PrivateFields>(this, {
-            _position: observable,
-            position: computed,
-            setPosition: action
+            _rover: observable,
+            rover: computed,
+            setRover: action
         });
-
         this._initWebSocket();
+    }    
+
+    get rover(): RoverData {
+        return this._rover;
     }
 
-    get position(): Position {
-        return this._position;
-    }
-
-    async putPosition(): Promise<void> {
+    async putRover(): Promise<void> {
         if (this._socket && this._socket.readyState === WebSocket.OPEN) {
-          const payload = JSON.stringify(this._position);
-          this._socket.send(payload);
+        //   const payload = JSON.stringify(this._position);
+        //   this._socket.send(payload);
         }
     }
     
     async getInfo(): Promise<void> {
-    if (this._socket && this._socket.readyState === WebSocket.OPEN) {
-    //   // Отправка GET-запроса через WebSocket
-    //   this._socket.send('GET_INFO');
-    console.log('get info')
-    }
+        if (this._socket && this._socket.readyState === WebSocket.OPEN) {
+        //   // Отправка GET-запроса через WebSocket
+        //   this._socket.send('GET_INFO');
+        console.log('get info')
+        }
     }
 }

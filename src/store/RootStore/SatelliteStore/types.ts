@@ -1,9 +1,13 @@
-export type Position = {
-    xPosition: number,
-    yPosition: number
-}
+// export type ClientData = {
+//     xPosition: number,
+//     yPosition: number
+// }
 
-export type ServerData = {
-    xPosition: number;
-    yPosition: number;
+export type RoverData = {
+    uuid: string;
+    name: string;
+    x: number;
+    y: number;
+    angle: number;
+    charge: number;
   };
