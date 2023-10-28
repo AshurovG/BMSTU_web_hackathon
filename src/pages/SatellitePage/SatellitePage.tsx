@@ -28,7 +28,7 @@ import Map from "components/Map";
 
 import Canvas from "components/Canvas";
 
-const point = { x: 95, y: 95 };
+// const point = { x: 95, y: 95 };
 
 const SatellitePage = () => {
   return (
@@ -40,7 +40,7 @@ const SatellitePage = () => {
       <Header></Header>
       <div className={styles.sat__page_wrapper}>
         <div className={styles.sat__page_rover}>
-          <Map point={point} />
+          <Map />
           <RoverInfo />
         </div>
       </div>
