@@ -21,8 +21,14 @@ const ProfileWindow: React.FC = () => {
   };
 
   const handleButtonClick = () => {
-    const deltaZ = sliderValues - rootStore.satellite.rover.z 
+    let deltaZ = sliderValues - rootStore.satellite.rover.z 
     console.log('deltaZ', deltaZ)
+
+    if (!deltaZ) {
+      deltaZ = 0;                     
+    }
+
+    console.log(rootStore.satellite.rover.z)
 
     rootStore.satellite.setMove({uuid: rootStore.satellite.rover.uuid, x: 0, y: 0 , z: deltaZ})
   }
@@ -57,11 +63,11 @@ const ProfileWindow: React.FC = () => {
               onChangeValues={handleSliderChange}
               minimum={1}
               maximum={99}
-              title="На сколько погрузить / поднять?"
+              title="Выберите глубину:"
             />
           <div className={styles['info__actions-btns']}>
-            <Button onClick={handleButtonClick} className={styles['info__actions-btn']}>Погрузить</Button>
-            <Button className={styles['info__actions-btn']} onClick={handleButtonClick}>Поднять</Button>
+            <Button onClick={handleButtonClick} className={styles['info__actions-btn']}>Установить глубину</Button>
+            {/* <Button className={styles['info__actions-btn']} onClick={handleButtonClick}>Поднять</Button> */}
           </div>
         </div>
 

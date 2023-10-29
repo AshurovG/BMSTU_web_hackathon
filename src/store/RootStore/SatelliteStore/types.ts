@@ -11,6 +11,7 @@ export type RoverData = {
     z: number;
     temperature: number;
     charge: number;
+    warning: string;
 };
 
 export type MoveData = {

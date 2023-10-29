@@ -28,6 +28,7 @@ export default class SatelliteStore implements ISatelliteStore {
     z: 0,
     charge: 0,
     temperature: 0,
+    warning: 'none'
   };
 
   private _move = {
