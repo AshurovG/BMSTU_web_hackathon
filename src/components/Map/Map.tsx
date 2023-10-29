@@ -58,8 +58,6 @@ for (let x = 0; x <= 100; x++) {
   }
 }
 
-alert(data);
-
 const Map = () => {
   const ref = React.useRef<SVGSVGElement | null>(null);
 
