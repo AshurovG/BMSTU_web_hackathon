@@ -39,9 +39,7 @@ const MainPage = () => {
         })}
       >
         <Header></Header>
-        <div className={styles["main__page-wrapper"]}>
-          <MapChart />
-        </div>
+        <div className={styles["main__page-wrapper"]}>{/* <MapChart /> */}</div>
       </div>
     </>
   );

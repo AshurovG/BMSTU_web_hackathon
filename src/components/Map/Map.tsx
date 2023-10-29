@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Map.module.scss";
 import rootStore from "store/RootStore";
 import { observer } from "mobx-react-lite";
+import MapChart from "components/HightMap";
 
 // interface Map {
 //   x: number;
@@ -21,6 +22,7 @@ const Map = () => {
 
   return (
     <div className={styles.map}>
+      <MapChart />
       <div
         className={styles.rover}
         style={{

@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 
+import styles from "./HighMap.module.scss";
+
 type Data = {
   x: number;
   y: number;
@@ -15,12 +17,13 @@ for (let x = 0; x <= 100; x++) {
     data.push({ x, y, z });
   }
 }
+
 const MapChart = () => {
   const ref = useRef<SVGSVGElement | null>(null);
 
   useEffect(() => {
     const svg = d3.select(ref.current);
-    const width = 500;
+    const width = 868;
     const height = 500;
 
     // create a color scale
@@ -43,11 +46,11 @@ const MapChart = () => {
     // append a circle to each group
     group
       .append("circle")
-      .attr("r", 3) // adjust as needed
+      .attr("r", 5) // adjust as needed
       .attr("fill", (d) => color(d.z));
   }, []);
 
-  return <svg ref={ref} width={500} height={500} />;
+  return <svg className={styles.map} ref={ref} width={868} height={500} />;
 };
 
 export default MapChart;
