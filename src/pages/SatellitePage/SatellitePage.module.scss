@@ -18,10 +18,13 @@
     margin-bottom: 30px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 }
 
 .profile__view {
   width: 10%; /* Задайте нужную ширину */
-  background-color: rgb(2, 12, 75); /* Измените цвет фона на свой */
+  border-radius: 10px;
+  height: 500px;
+  background-color: rgb(1, 15, 105); /* Измените цвет фона на свой */
 }

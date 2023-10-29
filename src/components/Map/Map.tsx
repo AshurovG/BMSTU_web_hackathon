@@ -42,7 +42,7 @@ const Map = () => {
 
   React.useEffect(() => {
     const svg = d3.select(ref.current);
-    const width = 868;
+    const width = 650;
     const height = 500;
 
     const color = d3
@@ -115,7 +115,7 @@ const Map = () => {
 
   return (
     <div className={styles.map}>
-      <svg onClick={handleClick} className={styles.map} ref={ref} width={868} height={500} />;
+      <svg onClick={handleClick} className={styles.map} ref={ref} width={650} height={500} />;
       <div
         className={styles.rover}
         style={{

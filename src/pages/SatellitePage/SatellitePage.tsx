@@ -40,7 +40,10 @@ const SatellitePage = () => {
       <Header></Header>
       <div className={styles.sat__page_wrapper}>
         <div className={styles.sat__page_rover}>
-          <Map /> 
+          <Map />
+
+          <div className={styles.profile__view}></div>
+
           <RoverInfo />
         </div>
       </div>
