@@ -66,7 +66,7 @@ const Map = () => {
 
   return (
     <div className={styles.map} onClick={handleClick}>
-      {/* <MapChart /> */}
+      <MapChart />
       <div
         className={styles.rover}
         style={{
