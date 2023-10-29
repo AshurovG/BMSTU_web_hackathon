@@ -12,22 +12,28 @@ import rootStore from "store/RootStore";
 import Slider from "components/Slider";
 
 const ProfileWindow: React.FC = () => {
-  const [value, setValue] = React.useState('')
+  const [value, setValue] = React.useState("");
   const [sliderValues, setSliderValues] = React.useState(1);
 
   const handleSliderChange = (value: number) => {
     setSliderValues(value);
-    console.log(value)
+    console.log(value);
   };
 
   const handleButtonClick = () => {
-    const deltaZ = sliderValues - rootStore.satellite.rover.z 
-    console.log('deltaZ', deltaZ)
+    let deltaZ = sliderValues - rootStore.satellite.rover.z;
+    console.log("deltaZ", deltaZ);
 
-    rootStore.satellite.setMove({uuid: rootStore.satellite.rover.uuid, x: 0, y: 0 , z: deltaZ})
-  }
-
-  
+    if (!deltaZ) {
+      deltaZ = 0;
+    }
+    rootStore.satellite.setMove({
+      uuid: rootStore.satellite.rover.uuid,
+      x: 0,
+      y: 0,
+      z: deltaZ,
+    });
+  };
 
   return (
     <div className={styles.info}>
@@ -54,14 +60,24 @@ const ProfileWindow: React.FC = () => {
           </Button>
           {/* <Input placeholder="Процент погружения/всплытия" value={value} onChange={setValue}></Input> */}
           <Slider
-              onChangeValues={handleSliderChange}
-              minimum={1}
-              maximum={99}
-              title="На сколько погрузить / поднять?"
-            />
-          <div className={styles['info__actions-btns']}>
-            <Button onClick={handleButtonClick} className={styles['info__actions-btn']}>Погрузить</Button>
-            <Button className={styles['info__actions-btn']} onClick={handleButtonClick}>Поднять</Button>
+            onChangeValues={handleSliderChange}
+            minimum={1}
+            maximum={99}
+            title="На сколько погрузить / поднять?"
+          />
+          <div className={styles["info__actions-btns"]}>
+            <Button
+              onClick={handleButtonClick}
+              className={styles["info__actions-btn"]}
+            >
+              Погрузить
+            </Button>
+            <Button
+              className={styles["info__actions-btn"]}
+              onClick={handleButtonClick}
+            >
+              Поднять
+            </Button>
           </div>
         </div>
 

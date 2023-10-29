@@ -42,7 +42,7 @@ const SatellitePage = () => {
   // }, []);
   const mapHDepth = 100; // Высота карты в метрах
 
-  const pointZ = (90 / mapHDepth) * 100; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  const pointZ = (rootStore.satellite.rover.z / mapHDepth) * 100; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   // const pointY = (rootStore.satellite.rover.y / mapHeight) * 100; // Преобразование координаты Y в проценты
 
   return (
