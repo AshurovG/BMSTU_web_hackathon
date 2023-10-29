@@ -13,11 +13,21 @@ import Slider from "components/Slider";
 
 const ProfileWindow: React.FC = () => {
   const [value, setValue] = React.useState('')
-  const [sliderValues, setSliderValues] = React.useState([1, 99]);
+  const [sliderValues, setSliderValues] = React.useState(1);
 
-  const handleSliderChange = (values: number[]) => {
-    setSliderValues(values);
+  const handleSliderChange = (value: number) => {
+    setSliderValues(value);
+    console.log(value)
   };
+
+  const handleButtonClick = () => {
+    const deltaZ = sliderValues - rootStore.satellite.rover.z 
+    console.log('deltaZ', deltaZ)
+
+    rootStore.satellite.setMove({uuid: rootStore.satellite.rover.uuid, x: 0, y: 0 , z: deltaZ})
+  }
+
+  
 
   return (
     <div className={styles.info}>
@@ -28,10 +38,10 @@ const ProfileWindow: React.FC = () => {
             Координаты: x: {rootStore.satellite.rover.x} y:{" "}
             {rootStore.satellite.rover.y}
           </h3>
-          <h3>Глубина погружения: 33%</h3>
-          <h3>Угол поворота: {rootStore.satellite.rover.angle} градусов</h3>
+          <h3>Глубина погружения: {rootStore.satellite.rover.z}%</h3>
 
           <h3>Заряд: {rootStore.satellite.rover.charge}%</h3>
+          <h3>Температура: {rootStore.satellite.rover.temperature} градусов</h3>
         </div>
 
         <div className={styles.info__actions}>
@@ -47,11 +57,11 @@ const ProfileWindow: React.FC = () => {
               onChangeValues={handleSliderChange}
               minimum={1}
               maximum={99}
-              title="Price Range"
+              title="На сколько погрузить / поднять?"
             />
           <div className={styles['info__actions-btns']}>
-            <Button onClick={() => rootStore.satellite.setImmersion({uuid: rootStore.satellite.rover.uuid, move: 'down', depth: Number(value)})} className={styles['info__actions-btn']}>Погрузить</Button>
-            <Button onClick={() => rootStore.satellite.setImmersion({uuid: rootStore.satellite.rover.uuid, move: 'up', depth: Number(value)})} className={styles['info__actions-btn']}>Поднять</Button>
+            <Button onClick={handleButtonClick} className={styles['info__actions-btn']}>Погрузить</Button>
+            <Button className={styles['info__actions-btn']} onClick={handleButtonClick}>Поднять</Button>
           </div>
         </div>
 

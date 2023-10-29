@@ -9,7 +9,7 @@ export type SliderProps = {
   minimum: number;
   maximum: number;
   title?: string;
-  onChangeValues: (values: number[]) => void;
+  onChangeValues: (values: number) => void;
 };
 
 const SliderFilter: React.FC<SliderProps> = ({
@@ -18,30 +18,30 @@ const SliderFilter: React.FC<SliderProps> = ({
   title,
   onChangeValues,
 }) => {
-  const [values, setValues] = useState([minimum, maximum]);
+  const [value, setValues] = useState(1);
 
   const onUpdateValues = useCallback(
     debounce((newValues) => {
       onChangeValues(newValues);
-    }, 1000),
+    }, 0),
     []
   );
 
-  const handleSliderChange = (newValues: number[]) => {
-    setValues(newValues);
-    onUpdateValues(newValues);
+  const handleSliderChange = (value: number) => {
+    setValues(value);
+    onUpdateValues(value);
   };
 
   return (
     <div className="filter">
       <div className="filter__title">{title}</div>
       <div className="filter__range">
-        ${values[0]} - ${values[1]}
+        {value}% - {99}%
       </div>
       <Slider
         className="filter__slider"
         onChange={handleSliderChange}
-        value={values}
+        value={value}
         min={minimum}
         max={maximum}
       />

@@ -72,8 +72,8 @@ const Map = () => {
     const scaleX = mapWidth / rect.width;
     const scaleY = mapHeight / rect.height;
   
-    const clickX = Math.floor((clientX - rect.left) * scaleX);
-    const clickY = Math.floor((clientY - rect.top) * scaleY);
+    const clickX = Math.ceil((clientX - rect.left) * scaleX);
+    const clickY = Math.ceil((clientY - rect.top) * scaleY);
 
     const deltaX = Number(clickX) - pointX;
     const deltaY = Number(clickY) - pointY;
@@ -100,15 +100,19 @@ const Map = () => {
       }
     }
 
-    for (let command of commands) {
-      rootStore.satellite.setMove({
-        uuid: rootStore.satellite.rover.uuid,
-        move: command,
-      });
-    }
+    rootStore.satellite.setMove({
+      uuid: rootStore.satellite.rover.uuid,
+      x: deltaX,
+      y: deltaY,
+      z: 0
+    });
 
-    // console.log(commands);
-    console.log(deltaX, deltaY);
+    console.log({
+      uuid: rootStore.satellite.rover.uuid,
+      x: deltaX,
+      y: deltaY,
+      z: 0
+    });
   };
 
   // return 

@@ -8,14 +8,16 @@ export type RoverData = {
     name: string;
     x: number;
     y: number;
-    angle: number;
+    z: number;
+    temperature: number;
     charge: number;
 };
 
 export type MoveData = {
   uuid: string;
-  // move: 'up' | 'down' | 'left' | 'right' | '';
-  move: string;
+  x: number;
+  y: number;
+  z: number;
 };
 
 export type ImmersionData = {
