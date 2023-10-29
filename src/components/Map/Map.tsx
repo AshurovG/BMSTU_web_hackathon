@@ -3,6 +3,7 @@ import styles from "./Map.module.scss";
 import rootStore from "store/RootStore";
 import { observer } from "mobx-react-lite";
 import MapChart from "components/HightMap";
+import * as d3 from "d3";
 
 // interface Map {
 //   x: number;
@@ -13,23 +14,69 @@ import MapChart from "components/HightMap";
 //   point: Map;
 // }
 
+type Data = {
+  x: number;
+  y: number;
+  z: number;
+};
+
+const data: Data[] = [];
+
+for (let x = 0; x <= 100; x++) {
+  for (let y = 0; y <= 100; y++) {
+    const z = Math.floor(Math.random() * 3) * 10; // 0, 10, or 20
+    data.push({ x, y, z });
+  }
+}
+
+
+
 const Map = () => {
+  const ref = React.useRef<SVGSVGElement | null>(null);
+
   const mapWidth = 100; // Ширина карты в метрах
   const mapHeight = 100; // Высота карты в метрах
 
   const pointX = (rootStore.satellite.rover.x / mapWidth) * 100; // Преобразование координаты X в проценты
   const pointY = (rootStore.satellite.rover.y / mapHeight) * 100; // Преобразование координаты Y в проценты
 
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    const { offsetX, offsetY } = event.nativeEvent;
-    const targetElement = event.target as HTMLElement;
-    const clickX = Math.floor((offsetX / targetElement.offsetWidth) * mapWidth);
-    const clickY = Math.floor(
-      (offsetY / targetElement.offsetHeight) * mapHeight
-    );
+  React.useEffect(() => {
+    const svg = d3.select(ref.current);
+    const width = 868;
+    const height = 500;
 
-    const deltaX = clickX - pointX;
-    const deltaY = clickY - pointY;
+    const color = d3
+      .scaleSequential()
+      .domain([0, d3.max(data, (d) => d.z) || 0])
+      .interpolator(d3.interpolateHsl("lightblue", "darkblue"));
+
+    const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
+    const y = d3.scaleLinear().domain([0, 100]).range([height, 0]);
+
+    const group = svg
+      .selectAll("g")
+      .data(data)
+      .join("g")
+      .attr("transform", (d) => `translate(${x(d.x)}, ${y(d.y)})`);
+
+    group
+      .append("circle")
+      .attr("r", 5)
+      .attr("fill", (d) => color(d.z));
+  }, []);
+
+  const handleClick = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+    const { clientX, clientY, currentTarget } = event;
+    const rect = currentTarget.getBoundingClientRect();
+
+    const scaleX = mapWidth / rect.width;
+    const scaleY = mapHeight / rect.height;
+  
+    const clickX = Math.floor((clientX - rect.left) * scaleX);
+    const clickY = Math.floor((clientY - rect.top) * scaleY);
+
+    const deltaX = Number(clickX) - pointX;
+    const deltaY = Number(clickY) - pointY;
 
     // Фрмирование массива операций
     let commands = [];
@@ -64,9 +111,11 @@ const Map = () => {
     console.log(deltaX, deltaY);
   };
 
+  // return 
+
   return (
-    <div className={styles.map} onClick={handleClick}>
-      <MapChart />
+    <div className={styles.map}>
+      <svg onClick={handleClick} className={styles.map} ref={ref} width={868} height={500} />;
       <div
         className={styles.rover}
         style={{
