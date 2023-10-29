@@ -6,6 +6,7 @@ import ProfileWindow from "components/ProfileWindow";
 import ModalWindow from "components/ModalWindow";
 import RoverInfo from "components/RoverInfo";
 import { observer } from "mobx-react-lite";
+import Slider from "components/Slider";
 // import Button from "components/Button";
 // import AuthForm from "components/AuthForm";
 // import LockingScreen from "components/LockingScreen";
@@ -31,6 +32,13 @@ import Canvas from "components/Canvas";
 // const point = { x: 95, y: 95 };
 
 const SatellitePage = () => {
+  const [sliderValues, setSliderValues] = useState([1, 99]);
+
+  const handleSliderChange = (values: number[]) => {
+    setSliderValues(values);
+  };
+
+
   return (
     <div
       className={cn(styles.sat__page, {

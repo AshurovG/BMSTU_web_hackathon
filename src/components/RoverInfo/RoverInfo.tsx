@@ -9,10 +9,16 @@ import Input from "components/Input";
 import ProfileLogoIcon from "components/icons/ProfileLogoIcon";
 import { Link } from "react-router-dom";
 import rootStore from "store/RootStore";
-
+import Slider from "components/Slider";
 
 const ProfileWindow: React.FC = () => {
   const [value, setValue] = React.useState('')
+  const [sliderValues, setSliderValues] = React.useState([1, 99]);
+
+  const handleSliderChange = (values: number[]) => {
+    setSliderValues(values);
+  };
+
   return (
     <div className={styles.info}>
       <div className={styles.info__wrapper}>
@@ -36,7 +42,13 @@ const ProfileWindow: React.FC = () => {
           <Button className={styles.info__actions_button}>
             Собрать материал
           </Button>
-          <Input placeholder="Процент погружения/всплытия" value={value} onChange={setValue}></Input>
+          {/* <Input placeholder="Процент погружения/всплытия" value={value} onChange={setValue}></Input> */}
+          <Slider
+              onChangeValues={handleSliderChange}
+              minimum={1}
+              maximum={99}
+              title="Price Range"
+            />
           <div className={styles['info__actions-btns']}>
             <Button onClick={() => rootStore.satellite.setImmersion({uuid: rootStore.satellite.rover.uuid, move: 'down', depth: Number(value)})} className={styles['info__actions-btn']}>Погрузить</Button>
             <Button onClick={() => rootStore.satellite.setImmersion({uuid: rootStore.satellite.rover.uuid, move: 'up', depth: Number(value)})} className={styles['info__actions-btn']}>Поднять</Button>
