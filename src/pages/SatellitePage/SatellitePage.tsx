@@ -17,7 +17,7 @@ import Input from "components/Input";
 import CheckBox from "components/CheckBox";
 import Loader from "components/Loader";
 // import ModalWindow from "components/ModalWindow";
-import Slider from "components/Slider";
+// import Slider from "components/Slider";
 
 import ThemeSwitcher from "components/ThemeSwitcher";
 import useLocalStorage from "use-local-storage";
@@ -40,7 +40,7 @@ const SatellitePage = () => {
       <Header></Header>
       <div className={styles.sat__page_wrapper}>
         <div className={styles.sat__page_rover}>
-          <Map />
+          <Map /> 
           <RoverInfo />
         </div>
       </div>

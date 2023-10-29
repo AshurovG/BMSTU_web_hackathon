@@ -43,12 +43,12 @@ const ProfileWindow: React.FC = () => {
           </div>
         </div>
 
-        <div className={styles.info__manage}>
+        {/* <div className={styles.info__manage}>
           <Button onClick={() => rootStore.satellite.setMove({uuid: rootStore.satellite.rover.uuid, move: 'up'})}>W</Button>
           <Button onClick={() => rootStore.satellite.setMove({uuid: rootStore.satellite.rover.uuid, move: 'down'})}>S</Button>
           <Button onClick={() => rootStore.satellite.setMove({uuid: rootStore.satellite.rover.uuid, move: 'left'})}>A</Button>
           <Button onClick={() => rootStore.satellite.setMove({uuid: rootStore.satellite.rover.uuid, move: 'right'})}>D</Button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

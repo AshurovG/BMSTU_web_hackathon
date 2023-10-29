@@ -15,7 +15,13 @@
   }
   &_rover {
     margin-top: 110px;
+    margin-bottom: 30px;
     display: flex;
     justify-content: space-between;
   }
+}
+
+.profile__view {
+  width: 10%; /* Задайте нужную ширину */
+  background-color: rgb(2, 12, 75); /* Измените цвет фона на свой */
 }
