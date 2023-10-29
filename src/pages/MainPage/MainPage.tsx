@@ -27,6 +27,8 @@ import ThreeD from "components/ThreeD";
 import HightMap from "components/HightMap";
 import MapChart from "components/HightMap";
 
+import vid from "assets/backvid.mp4";
+
 const MainPage = () => {
   const [sliderValues, setSliderValues] = useState([0, 10000]);
 
@@ -42,6 +44,9 @@ const MainPage = () => {
         })}
       >
         <Header></Header>
+        <video className={styles.vid} autoPlay muted loop id="myVideo">
+          <source src={vid} type="video/mp4" />
+        </video>
         <div className={styles["main__page-wrapper"]}>
           <div className={styles["main__page-content"]}>
             <h1 className={styles["main__page-title"]}>
