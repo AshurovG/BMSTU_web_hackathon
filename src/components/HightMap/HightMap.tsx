@@ -26,27 +26,23 @@ const MapChart = () => {
     const width = 868;
     const height = 500;
 
-    // create a color scale
     const color = d3
       .scaleSequential()
       .domain([0, d3.max(data, (d) => d.z) || 0])
       .interpolator(d3.interpolateHsl("lightblue", "darkblue"));
 
-    // create x and y scales
     const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
     const y = d3.scaleLinear().domain([0, 100]).range([height, 0]);
 
-    // create a group for each data point
     const group = svg
       .selectAll("g")
       .data(data)
       .join("g")
       .attr("transform", (d) => `translate(${x(d.x)}, ${y(d.y)})`);
 
-    // append a circle to each group
     group
       .append("circle")
-      .attr("r", 5) // adjust as needed
+      .attr("r", 5)
       .attr("fill", (d) => color(d.z));
   }, []);
 
