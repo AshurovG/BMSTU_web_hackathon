@@ -23,6 +23,9 @@ import useLocalStorage from "use-local-storage";
 import userSvg from "assets/icons/sun.png";
 import rootStore from "store/RootStore";
 import MultiDropdown from "components/DropDown";
+import ThreeD from "components/ThreeD";
+import HightMap from "components/HightMap";
+import MapChart from "components/HightMap";
 
 const MainPage = () => {
   const [sliderValues, setSliderValues] = useState([0, 10000]);
