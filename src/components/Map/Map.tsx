@@ -93,6 +93,9 @@ const Map = () => {
   }, []);
 
   const handleClick = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+    if (rootStore.satellite.rover.warning === 'moving') {
+      return
+    }
     const { clientX, clientY, currentTarget } = event;
     const rect = currentTarget.getBoundingClientRect();
 

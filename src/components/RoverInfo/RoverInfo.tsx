@@ -69,12 +69,19 @@ const ProfileWindow: React.FC = () => {
             title="Выберите глубину:"
           />
           <div className={styles["info__actions-btns"]}>
-            <Button
+            {rootStore.satellite.rover.warning !== 'moving' ? <Button
               onClick={handleButtonClick}
               className={styles["info__actions-btn"]}
             >
               Установить глубину
             </Button>
+            :
+            <Button
+              disabled
+              className={styles["info__actions-btn"]}
+            >
+              Установить глубину
+            </Button>}
             {/* <Button className={styles['info__actions-btn']} onClick={handleButtonClick}>Поднять</Button> */}
           </div>
         </div>
