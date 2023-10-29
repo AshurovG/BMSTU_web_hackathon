@@ -4,9 +4,9 @@
   height: 100vh;
   overflow: hidden;
 
-  background-image: url("../../assets/icons/backimg.webp");
+  // background-image: url("../../assets/icons/backimg.webp");
   background-size: cover;
-  
+
   &.dark {
     background-color: $dark-background;
   }
@@ -41,7 +41,7 @@
     margin-top: 30px;
     font-size: 25px;
     color: #fff;
-    text-align: center; 
+    text-align: center;
   }
 
   &-btn {
@@ -51,3 +51,10 @@
   }
 }
 
+.vid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+}
