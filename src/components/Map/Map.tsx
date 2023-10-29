@@ -22,14 +22,43 @@ type Data = {
 
 const data: Data[] = [];
 
+const centers = [
+  { x: 0, y: 100 },
+  { x: 5, y: 70 },
+  { x: 30, y: 60 },
+  { x: 90, y: 50 },
+  { x: 50, y: 0 },
+  { x: 5, y: 5 },
+  { x: 25, y: 25 },
+  { x: 75, y: 25 },
+  { x: 50, y: 75 },
+  { x: 100, y: 100 },
+  { x: 20, y: 47 },
+  { x: 50, y: 50 },
+  { x: 80, y: 80 },
+  { x: 100, y: 100 },
+  { x: 100, y: 0 },
+];
+
 for (let x = 0; x <= 100; x++) {
   for (let y = 0; y <= 100; y++) {
-    const z = Math.floor(Math.random() * 3) * 10; // 0, 10, or 20
-    data.push({ x, y, z });
+    let maxZ = 0;
+
+    for (const center of centers) {
+      const distanceToCenter = Math.sqrt(
+        Math.pow(x - center.x, 2) + Math.pow(y - center.y, 2)
+      );
+      const z = Math.floor((1 - distanceToCenter / 25) * 100); // Adjusted divisor to make radii smaller
+      if (z > maxZ) {
+        maxZ = z;
+      }
+    }
+
+    data.push({ x, y, z: maxZ });
   }
 }
 
-
+alert(data);
 
 const Map = () => {
   const ref = React.useRef<SVGSVGElement | null>(null);
@@ -61,7 +90,7 @@ const Map = () => {
 
     group
       .append("circle")
-      .attr("r", 5)
+      .attr("r", 3)
       .attr("fill", (d) => color(d.z));
   }, []);
 
@@ -71,7 +100,7 @@ const Map = () => {
 
     const scaleX = mapWidth / rect.width;
     const scaleY = mapHeight / rect.height;
-  
+
     const clickX = Math.floor((clientX - rect.left) * scaleX);
     const clickY = Math.floor((clientY - rect.top) * scaleY);
 
@@ -111,11 +140,18 @@ const Map = () => {
     console.log(deltaX, deltaY);
   };
 
-  // return 
+  // return
 
   return (
     <div className={styles.map}>
-      <svg onClick={handleClick} className={styles.map} ref={ref} width={650} height={500} />;
+      <svg
+        onClick={handleClick}
+        className={styles.map}
+        ref={ref}
+        width={650}
+        height={500}
+      />
+      ;
       <div
         className={styles.rover}
         style={{
