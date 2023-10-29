@@ -39,6 +39,18 @@
     &_button {
       margin-bottom: 15px;
     }
+
+    &-btns {
+      margin-top: 15px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &-btn {
+      display: block;
+      width: 130px;
+    }
+
   }
 
   &__manage {

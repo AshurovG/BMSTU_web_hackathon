@@ -1,43 +1,52 @@
-import * as React from 'react';
-import cn from 'classnames'
-import { toJS } from 'mobx';
-import { observer } from 'mobx-react-lite';
-import styles from './Slider.module.scss'
+import React, { useCallback } from "react";
+import { useState } from "react";
+import Slider from "react-slider";
+import debounce from "lodash.debounce";
 
-export type SliderProps = Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    'onChange'
-> & {
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    className?: string;
-    sliderValue?: number;
-    outputStyle?: {left: string};
-    minValue: number;
-    maxValue: number;
-    sliderRef?: React.RefObject<HTMLInputElement>;
-    outputRef?: React.RefObject<HTMLOutputElement>;
-    step: number
+import "./Slider.css";
+
+export type SliderProps = {
+  minimum: number;
+  maximum: number;
+  title?: string;
+  onChangeValues: (values: number[]) => void;
 };
 
-const Slider: React.FC<SliderProps> = ({ minValue, sliderValue, outputStyle, maxValue, className, sliderRef, outputRef, onChange, step }) => {
-    return (
-      <div className={cn(styles.slider, className)}>
-        <output htmlFor="fader" id="volume" style={toJS(outputStyle)} ref={outputRef}>
-          {sliderValue}
-        </output>
-        <input
-          className={styles.slider__item}
-          type="range"
-          id="fader"
-          min={minValue}
-          max={maxValue}
-          value={sliderValue}
-          onChange={onChange}
-          step={step}
-          ref={sliderRef}
-        />
+const SliderFilter: React.FC<SliderProps> = ({
+  minimum,
+  maximum,
+  title,
+  onChangeValues,
+}) => {
+  const [values, setValues] = useState([minimum, maximum]);
+
+  const onUpdateValues = useCallback(
+    debounce((newValues) => {
+      onChangeValues(newValues);
+    }, 1000),
+    []
+  );
+
+  const handleSliderChange = (newValues: number[]) => {
+    setValues(newValues);
+    onUpdateValues(newValues);
+  };
+
+  return (
+    <div className="filter">
+      <div className="filter__title">{title}</div>
+      <div className="filter__range">
+        {values[0]}% - {values[1]}%
       </div>
-    );
+      <Slider
+        className="filter__slider"
+        onChange={handleSliderChange}
+        value={values}
+        min={minimum}
+        max={maximum}
+      />
+    </div>
+  );
 };
 
-export default observer(Slider);
+export default SliderFilter;

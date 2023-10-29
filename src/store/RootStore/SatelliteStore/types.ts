@@ -17,3 +17,9 @@ export type MoveData = {
   // move: 'up' | 'down' | 'left' | 'right' | '';
   move: string;
 };
+
+export type ImmersionData = {
+  uuid: string;
+  move: string;
+  depth: number;
+};

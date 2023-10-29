@@ -18,7 +18,6 @@ import CheckBox from "components/CheckBox";
 import Loader from "components/Loader";
 // import ModalWindow from "components/ModalWindow";
 import Slider from "components/Slider";
-
 import ThemeSwitcher from "components/ThemeSwitcher";
 import useLocalStorage from "use-local-storage";
 import userSvg from "assets/icons/sun.png";
@@ -26,6 +25,12 @@ import rootStore from "store/RootStore";
 import MultiDropdown from "components/DropDown";
 
 const MainPage = () => {
+  const [sliderValues, setSliderValues] = useState([0, 10000]);
+
+  const handleSliderChange = (values: number[]) => {
+    setSliderValues(values);
+  };
+
   return (
     <>
       <div
@@ -59,6 +64,13 @@ const MainPage = () => {
                 </svg>
               </Button>
             </Link>
+
+            <Slider
+              onChangeValues={handleSliderChange}
+              minimum={0}
+              maximum={10000}
+              title="Price Range"
+            />
           </div>
         </div>
       </div>
