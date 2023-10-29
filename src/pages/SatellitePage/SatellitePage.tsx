@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "components/Header";
@@ -32,6 +32,18 @@ import Canvas from "components/Canvas";
 // const point = { x: 95, y: 95 };
 
 const SatellitePage = () => {
+  // const [modalVisible, setModalVisible] = useState(true);
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     rootStore.satellite.setIsError(false);
+  //   }, 2000);
+
+  //   return () => clearTimeout(timeout);
+  // }, []);
+  const mapHDepth = 100; // Высота карты в метрах
+
+  const pointZ = (90 / mapHDepth) * 100; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  // const pointY = (rootStore.satellite.rover.y / mapHeight) * 100; // Преобразование координаты Y в проценты
 
   return (
     <div
@@ -44,7 +56,15 @@ const SatellitePage = () => {
         <div className={styles.sat__page_rover}>
           <Map />
 
-          <div className={styles.profile__view}></div>
+          <div className={styles.profile__view}>
+            <div
+              className={styles.rover}
+              style={{
+                top: `${pointZ}%`,
+                // left: `${pointX}%`,
+              }}
+            ></div>
+          </div>
 
           <RoverInfo />
         </div>
