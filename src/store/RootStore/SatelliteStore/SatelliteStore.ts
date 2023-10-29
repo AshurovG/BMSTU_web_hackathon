@@ -9,7 +9,7 @@ import {
 
 import axios from "axios";
 
-import { RoverData, MoveData, ImmersionData } from "./types";
+import { RoverData, MoveData, ImmersionData, Data } from "./types";
 
 export interface ISatelliteStore {
   putMove(): Promise<void>;
@@ -17,7 +17,7 @@ export interface ISatelliteStore {
   // setMap(): Promise<void>
 }
 
-type PrivateFields = "_rover" | "_move" | "_immersion";
+type PrivateFields = "_rover" | "_move" | "_immersion" | "_map";
 
 export default class SatelliteStore implements ISatelliteStore {
   private _rover = {
@@ -28,7 +28,7 @@ export default class SatelliteStore implements ISatelliteStore {
     z: 0,
     charge: 0,
     temperature: 0,
-    warning: 'none'
+    warning: "none",
   };
 
   private _move = {
@@ -43,6 +43,8 @@ export default class SatelliteStore implements ISatelliteStore {
     move: "",
     depth: 0,
   };
+
+  private _map: Data = [];
 
   private _socket: WebSocket | null = null;
   private _mapSocket: WebSocket | null = null;
@@ -78,8 +80,8 @@ export default class SatelliteStore implements ISatelliteStore {
       console.log("Получено сообщение:", event.data);
 
       runInAction(() => {
-        this._rover = JSON.parse(event.data);
-        console.log("data", this._rover);
+        this._map = JSON.parse(event.data);
+        console.log("data", this._map);
       });
     };
 
@@ -116,9 +118,11 @@ export default class SatelliteStore implements ISatelliteStore {
       _rover: observable,
       _move: observable,
       _immersion: observable,
+      _map: observable,
       // _isError: observable,
       rover: computed,
       immersion: computed,
+      map: computed,
       // setRover: action
       setImmersion: action,
     });
@@ -135,6 +139,10 @@ export default class SatelliteStore implements ISatelliteStore {
 
   get move(): MoveData {
     return this._move;
+  }
+
+  get map(): Data {
+    return this._map;
   }
 
   get immersion(): ImmersionData {

@@ -4,14 +4,14 @@
 // }
 
 export type RoverData = {
-    uuid: string;
-    name: string;
-    x: number;
-    y: number;
-    z: number;
-    temperature: number;
-    charge: number;
-    warning: string;
+  uuid: string;
+  name: string;
+  x: number;
+  y: number;
+  z: number;
+  temperature: number;
+  charge: number;
+  warning: string;
 };
 
 export type MoveData = {
@@ -26,3 +26,9 @@ export type ImmersionData = {
   move: string;
   depth: number;
 };
+
+export type Data = {
+  x: number;
+  y: number;
+  z: number;
+}[];

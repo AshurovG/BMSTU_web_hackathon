@@ -4,6 +4,7 @@ import rootStore from "store/RootStore";
 import { observer } from "mobx-react-lite";
 import MapChart from "components/HightMap";
 import * as d3 from "d3";
+// import data from '../../terrain'
 
 // interface Map {
 //   x: number;
@@ -20,7 +21,7 @@ type Data = {
   z: number;
 };
 
-const data: Data[] = [];
+let data: Data[] = [];
 
 const centers = [
   { x: 0, y: 100 },
@@ -57,6 +58,9 @@ for (let x = 0; x <= 100; x++) {
     data.push({ x, y, z: maxZ });
   }
 }
+
+// data = rootStore.satellite.map;
+console.log(data);
 
 const Map = () => {
   const ref = React.useRef<SVGSVGElement | null>(null);
