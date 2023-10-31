@@ -54,13 +54,13 @@ const ProfileWindow: React.FC = () => {
         </div>
 
         <div className={styles.info__actions}>
-          <Button className={styles.info__actions_button}>
+          {/* <Button className={styles.info__actions_button}>
             Включить освещение
           </Button>
           <Button className={styles.info__actions_button}>Анализ почвы</Button>
           <Button className={styles.info__actions_button}>
             Собрать материал
-          </Button>
+          </Button> */}
           {/* <Input placeholder="Процент погружения/всплытия" value={value} onChange={setValue}></Input> */}
           <Slider
             onChangeValues={handleSliderChange}

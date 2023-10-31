@@ -2,8 +2,6 @@ import React, { MouseEvent, MouseEventHandler } from "react";
 import cn from "classnames";
 import styles from "./ModalWindow.module.scss";
 
-import rootStore from "store/RootStore";
-
 export type ModalProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   active: boolean;
   handleBackdropClick: () => void;
@@ -34,13 +32,11 @@ const ModalWindow: React.FC<ModalProps> = ({
           active === false
             ? cn(
                 styles.modal__content,
-                { [styles.dark]: rootStore.theme.isDark },
                 className
               )
             : cn(
                 styles.modal__content,
                 styles.active,
-                { [styles.dark]: rootStore.theme.isDark },
                 className
               )
         }

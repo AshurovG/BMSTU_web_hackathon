@@ -2,18 +2,7 @@ import React from "react";
 import styles from "./Map.module.scss";
 import rootStore from "store/RootStore";
 import { observer } from "mobx-react-lite";
-import MapChart from "components/HightMap";
 import * as d3 from "d3";
-// import data from '../../terrain'
-
-// interface Map {
-//   x: number;
-//   y: number;
-// }
-
-// interface MapProps {
-//   point: Map;
-// }
 
 type Data = {
   x: number;
@@ -59,8 +48,6 @@ for (let x = 0; x <= 100; x++) {
   }
 }
 
-// data = rootStore.satellite.map;
-console.log(data);
 
 const Map = () => {
   const ref = React.useRef<SVGSVGElement | null>(null);
@@ -112,44 +99,13 @@ const Map = () => {
     const deltaX = Number(clickX) - pointX;
     const deltaY = Number(clickY) - pointY;
 
-    // Фрмирование массива операций
-    let commands = [];
-    if (deltaX > 0) {
-      for (let i = 0; i < deltaX; i++) {
-        commands.push("right");
-      }
-    } else {
-      for (let i = 0; i < Math.abs(deltaX); i++) {
-        commands.push("left");
-      }
-    }
-
-    if (deltaY > 0) {
-      for (let i = 0; i < deltaY; i++) {
-        commands.push("up");
-      }
-    } else {
-      for (let i = 0; i < Math.abs(deltaY); i++) {
-        commands.push("down");
-      }
-    }
-
     rootStore.satellite.setMove({
       uuid: rootStore.satellite.rover.uuid,
       x: deltaX,
       y: deltaY,
       z: 0,
     });
-
-    console.log({
-      uuid: rootStore.satellite.rover.uuid,
-      x: deltaX,
-      y: deltaY,
-      z: 0,
-    });
   };
-
-  // return
 
   return (
     <div className={styles.map}>

@@ -5,7 +5,6 @@
   width: 100%;
   min-height: 100vh;
   overflow: auto;
-  // background-color: #ff0404;
 
   &_wrapper {
     max-width: 1240px;
@@ -24,14 +23,20 @@
 
 .profile__view {
   position: relative;
-  width: 10%; /* Задайте нужную ширину */
+  width: 10%;
   border-radius: 10px;
   height: 500px;
   background: linear-gradient(
     to bottom,
     #add8e6,
     #00008b
-  ); /* Измените цвет фона на свой */
+  );
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 
 .rover {
@@ -41,15 +46,12 @@
   left: 50%;
   transform: translate(-25px, -25px);
 
-  //   border-radius: 50%;
-  //   background-color: rgb(255, 0, 0);
   background-image: url("../../assets/icons/submarine.png");
   background-size: cover;
-  // transform: translate(-15px, -15px);
-  // background-color: red;
 }
 
 .form__modal {
+  text-align: center;
   color: #fff;
   position: fixed;
   top: 330px;

@@ -4,12 +4,6 @@ import cn from "classnames";
 import MainPage from "pages/MainPage";
 import SatellitePage from "pages/SatellitePage";
 
-import rootStore from "../store/RootStore/instance";
-import classNames from "classnames";
-import useLocalStorage from "use-local-storage";
-
-// import DetaliedPage from 'pages/DetaliedPage';
-
 function App() {
   return (
     <div className={cn(styles.app)}>
